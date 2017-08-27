@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/saveword"
+        android:id="@+id/barBtn"
         android:title="저장"
         app:showAsAction="always"
         />

@@ -11,13 +11,14 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="368dp"
-        android:layout_height="495dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
         android:orientation="vertical"
-        android:weightSum="620"
+        android:paddingTop="70dp"
         tools:context=".MainActivity"
-        tools:layout_editor_absoluteY="8dp"
-        tools:layout_editor_absoluteX="8dp">
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
 
 
         <LinearLayout
@@ -87,33 +88,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="50dp"
                 android:text="온\n새\n미\n로"
-                android:textStyle="bold"
-                android:textSize="40dp" />
+                android:textSize="40dp"
+                android:textStyle="bold" />
 
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="10"
-            android:orientation="horizontal"
-            android:weightSum="360">
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="10" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="10" />
-
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="10" />
 
         </LinearLayout>
 

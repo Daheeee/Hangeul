@@ -2,15 +2,11 @@ package com.dongduk.hangeul.hangeul_test1;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +14,8 @@ import android.widget.Toast;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private CustomDialogActivity mCustomDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +62,10 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.barbtn, menu);
+        MenuItem item = menu.getItem(0);
+        item.setTitle("담기");
+
         return true;
     }
 
@@ -72,8 +73,11 @@ public class MainActivity extends BaseActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.saveword) {
-            Toast.makeText(MainActivity.this, "나의 우리말에 담겼습니다", Toast.LENGTH_SHORT).show();
+        if (id == R.id.barBtn) {
+            //Toast.makeText(MainActivity.this, "나의 우리말에 담겼습니다", Toast.LENGTH_SHORT).show();
+            //return true;
+            mCustomDialog = new CustomDialogActivity(this, "온새미로", clickListener);
+            mCustomDialog.show();
             return true;
         }
 
@@ -86,7 +90,7 @@ public class MainActivity extends BaseActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.id3) {
+        if (id == R.id.todayWord) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
@@ -100,4 +104,11 @@ public class MainActivity extends BaseActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private View.OnClickListener clickListener = new View.OnClickListener() {
+        public  void onClick(View v) {
+            Toast.makeText(getApplicationContext(), "클릭", Toast.LENGTH_SHORT).show();
+            mCustomDialog.dismiss();
+        }
+    };
 }

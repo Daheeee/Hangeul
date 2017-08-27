@@ -3,7 +3,7 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/id3"
+            android:id="@+id/todayWord"
             android:icon="@mipmap/icon_1"
             android:title="오늘의 우리말" />
         <item
