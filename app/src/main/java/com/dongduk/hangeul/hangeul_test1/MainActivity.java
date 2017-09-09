@@ -1,7 +1,10 @@
 package com.dongduk.hangeul.hangeul_test1;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -10,18 +13,22 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewStub;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private CustomDialogActivity mCustomDialog;
+    //private CustomDialogActivity mCustomDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("");
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -32,6 +39,10 @@ public class MainActivity extends BaseActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        ViewStub stub = (ViewStub)findViewById(R.id.stub);
+        stub.setLayoutResource(R.layout.content_main);
+        stub.inflate();
     }
 
     public void onClick(View v) {
@@ -42,8 +53,8 @@ public class MainActivity extends BaseActivity
                 mIntent = new Intent(this, WritingActivity.class);
                 startActivity(mIntent);
                 break;
-            case R.id.btnCardview:
-                mIntent = new Intent(this, CardviewActivity.class);
+            case R.id.btnList:
+                mIntent = new Intent(this, ListingActivity.class);
                 startActivity(mIntent);
                 break;
         }
@@ -74,10 +85,26 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         if (id == R.id.barBtn) {
-            //Toast.makeText(MainActivity.this, "나의 우리말에 담겼습니다", Toast.LENGTH_SHORT).show();
-            //return true;
-            mCustomDialog = new CustomDialogActivity(this, "온새미로", clickListener);
-            mCustomDialog.show();
+            // 커스텀 대화상자 레이아웃 inflation, View가 가지고있는 inflate 사용
+            final ConstraintLayout dialogLayout = (ConstraintLayout)View.inflate(this, R.layout.activity_custom_dialog, null);
+            new AlertDialog.Builder(this)
+
+                    //.setTitle("온새미로")
+
+                    // 4. 커스텀 대화상자 레이아웃을 다이얼로그에 추가
+                    .setView(dialogLayout)/*
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+//                            EditText etType = (EditText)dialogLayout.findViewById(R.id.editTextType);
+//                            EditText etAmount = (EditText)dialogLayout.findViewById(R.id.editTextAmount);
+//                            String result = etType.getText().toString() + "를 " + etAmount.getText().toString() +"개 선택";
+                            Toast.makeText(MainActivity.this, "온새미로", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton("취소", null)
+                    */
+                    .show();
             return true;
         }
 
@@ -88,15 +115,18 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+        Intent mIntent;
+
         int id = item.getItemId();
 
         if (id == R.id.todayWord) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.myWord) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.myRecord) {
+            mIntent = new Intent(this, MyRecordActivity.class);
+            startActivity(mIntent);
+        } else if (id == R.id.setting) {
 
         }
 
@@ -106,9 +136,9 @@ public class MainActivity extends BaseActivity
     }
 
     private View.OnClickListener clickListener = new View.OnClickListener() {
-        public  void onClick(View v) {
+        public void onClick(View v) {
             Toast.makeText(getApplicationContext(), "클릭", Toast.LENGTH_SHORT).show();
-            mCustomDialog.dismiss();
+            //mCustomDialog.dismiss();
         }
     };
 }

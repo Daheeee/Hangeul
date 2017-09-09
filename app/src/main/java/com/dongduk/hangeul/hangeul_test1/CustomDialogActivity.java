@@ -24,7 +24,11 @@ public class CustomDialogActivity extends Dialog {
         setContentView(R.layout.activity_custom_dialog);
 
         tvWord = (TextView)findViewById(R.id.tvWord);
-        btnSave = (Button)findViewById(R.id.btnSave);
+        //btnSave = (Button)findViewById(R.id.btnSave);
+    }
+
+    public CustomDialogActivity(Context context) {
+        super(context, android.R.style.Theme_Translucent_NoTitleBar);
     }
 
     public CustomDialogActivity(Context context, String title, View.OnClickListener singleListener) {
