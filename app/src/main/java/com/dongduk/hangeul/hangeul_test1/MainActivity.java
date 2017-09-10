@@ -122,6 +122,8 @@ public class MainActivity extends BaseActivity
         if (id == R.id.todayWord) {
 
         } else if (id == R.id.myWord) {
+            mIntent = new Intent(this, MyWordActivity.class);
+            startActivity(mIntent);
 
         } else if (id == R.id.myRecord) {
             mIntent = new Intent(this, MyRecordActivity.class);

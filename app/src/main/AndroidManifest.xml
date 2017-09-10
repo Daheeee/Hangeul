@@ -31,11 +31,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".ListingActivity"
+        <activity
+            android:name=".ListingActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".MyWordActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
     </application>
 
