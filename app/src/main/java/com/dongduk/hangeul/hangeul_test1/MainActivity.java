@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewStub;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -85,26 +86,17 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         if (id == R.id.barBtn) {
-            // 커스텀 대화상자 레이아웃 inflation, View가 가지고있는 inflate 사용
-            final ConstraintLayout dialogLayout = (ConstraintLayout)View.inflate(this, R.layout.activity_custom_dialog, null);
-            new AlertDialog.Builder(this)
-
+            final LinearLayout dialogLayout = (LinearLayout) View.inflate(this, R.layout.activity_custom_dialog, null);
+            AlertDialog dialog = new AlertDialog.Builder(this)
                     //.setTitle("온새미로")
-
-                    // 4. 커스텀 대화상자 레이아웃을 다이얼로그에 추가
-                    .setView(dialogLayout)/*
-                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-//                            EditText etType = (EditText)dialogLayout.findViewById(R.id.editTextType);
-//                            EditText etAmount = (EditText)dialogLayout.findViewById(R.id.editTextAmount);
-//                            String result = etType.getText().toString() + "를 " + etAmount.getText().toString() +"개 선택";
-                            Toast.makeText(MainActivity.this, "온새미로", Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .setNegativeButton("취소", null)
-                    */
+                    .setView(dialogLayout)
                     .show();
+
+            WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+            params.width = 950;
+            params.height = 350;
+            params.alpha = 50;
+            dialog.getWindow().setAttributes(params);
             return true;
         }
 
@@ -120,7 +112,7 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         if (id == R.id.todayWord) {
-
+            // 현재페이지
         } else if (id == R.id.myWord) {
             mIntent = new Intent(this, MyWordActivity.class);
             startActivity(mIntent);

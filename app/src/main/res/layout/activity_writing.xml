@@ -12,41 +12,39 @@
         android:id="@+id/w_word"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="23.7"
+        android:layout_marginTop="78dp"
+        android:layout_marginBottom="12dp"
         android:gravity="center"
         android:text="온새미로"
+        android:textAlignment="center"
         android:textColor="#000000"
-        android:textSize="24.9sp" />
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/w_mean"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="10.7"
         android:gravity="center"
+        android:layout_marginBottom="45dp"
         android:text="자연 그대로, 언제나 변함없이. 가르거나, 쪼개지않고,"
+        android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="11.1sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="272"
-        android:orientation="horizontal"
-        android:weightSum="360">
+    <EditText
+        android:id="@+id/et_writing"
+        android:layout_width="350dp"
+        android:layout_height="330dp"
+        android:layout_gravity="center"
+        android:background="#ffffff"
+        android:gravity="top"
+        android:hint="우리말로 아름다운 문장을 완성해보세요.\n(100자 내외)"
+        android:paddingBottom="17dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="17dp"
+        android:textColor="#000000"
+        android:textSize="15dp" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="19.7" />
-
-        <EditText
-            android:id="@+id/et_writing"
-            android:layout_width="0dp"
-            android:layout_height="385dp"
-            android:layout_weight="320.63"
-            android:background="#ffffff"
-            android:hint="우리말로 아름다운 문장을 완성해보세요.\n(100자 내외)"
-            android:textColor="#000000" />
-    </LinearLayout>
 </LinearLayout>

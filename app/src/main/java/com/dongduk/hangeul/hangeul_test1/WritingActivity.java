@@ -1,8 +1,11 @@
 package com.dongduk.hangeul.hangeul_test1;
 
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewStub;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class WritingActivity extends BaseActivity {
@@ -10,12 +13,19 @@ public class WritingActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_writing);
-        setTitle("");
+        setContentView(R.layout.activity_main);
 
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setTitle("");
+        TextView tvTitle = (TextView)findViewById(R.id.tvTitle);
+        tvTitle.setText("");
+
+        ViewStub stub = (ViewStub)findViewById(R.id.stub);
+        stub.setLayoutResource(R.layout.activity_writing);
+        stub.inflate();
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        */
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

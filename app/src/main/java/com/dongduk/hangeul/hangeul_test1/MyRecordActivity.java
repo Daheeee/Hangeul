@@ -53,14 +53,6 @@ public class MyRecordActivity extends BaseActivity implements NavigationView.OnN
 
         ViewPager viewPager=(ViewPager)findViewById(R.id.pager);        //Viewpager 선언 및 초기화
         viewPager.setAdapter(new adapter(getSupportFragmentManager()));
-
-//        ImageButton back=(ImageButton)findViewById(R.id.backbtn);
-//        back.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                finish();
-//            }
-//        });
     }
 
     @Override
@@ -107,8 +99,9 @@ public class MyRecordActivity extends BaseActivity implements NavigationView.OnN
         } else if (id == R.id.myWord) {
 
         } else if (id == R.id.myRecord) {
-            mIntent = new Intent(this, MyRecordActivity.class);
-            startActivity(mIntent);
+            // 현재 페이지
+//            mIntent = new Intent(this, MyRecordActivity.class);
+//            startActivity(mIntent);
         } else if (id == R.id.setting) {
 
         }
