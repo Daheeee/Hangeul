@@ -56,6 +56,7 @@ public class MainActivity extends BaseActivity
             case R.id.btnWrite:
                 mIntent = new Intent(this, WritingActivity.class);
                 startActivity(mIntent);
+                finish();
                 break;
             case R.id.btnList:
                 mIntent = new Intent(this, ListingActivity.class);
@@ -126,7 +127,6 @@ public class MainActivity extends BaseActivity
             startActivity(mIntent);
             finish();
         } else if (id == R.id.setting) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

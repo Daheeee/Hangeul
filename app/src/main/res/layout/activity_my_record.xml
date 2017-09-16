@@ -8,16 +8,12 @@
     android:background="@drawable/bg_view"
     tools:context="com.dongduk.hangeul.hangeul_test1.MyRecordActivity">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_record"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="450dp"
         android:layout_marginTop="130dp"
-
-        android:background="@android:color/transparent"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="0dp">
-
-    </android.support.v4.view.ViewPager>
+        tools:layout_editor_absoluteY="8dp" />
 
 </LinearLayout>
