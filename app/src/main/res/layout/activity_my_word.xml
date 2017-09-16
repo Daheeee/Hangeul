@@ -4,16 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
+    android:background="@drawable/bg"
     tools:context="com.dongduk.hangeul.hangeul_test1.MyWordActivity">
 
-    <android.support.v4.widget.Space
-        android:layout_width="20.7dp"
-        android:layout_height="wrap_content" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20.7dp"
         android:layout_marginTop="120dp"
         android:layout_marginRight="20.7dp"
         android:orientation="vertical">
@@ -35,22 +34,20 @@
 
     </LinearLayout>
 
-    <android.support.v4.widget.Space
-        android:layout_width="20.7dp"
-        android:layout_height="wrap_content" />
 
-    <!--&lt;!&ndash; filler &ndash;&gt;-->
-    <!--<TextView android:layout_height="0dip"-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_weight="1" />-->
+    <!-- filler -->
+    <TextView android:layout_height="0dip"
+        android:layout_width="fill_parent"
+        android:layout_weight="1" />
 
-    <!--<Button-->
-        <!--android:id="@+id/button"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="49.3dp"-->
-        <!--android:layout_gravity=""-->
-        <!--android:background="#c4792f"-->
-        <!--android:text="삭제"-->
-        <!--android:textColor="#ffffff" />-->
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="match_parent"
+        android:layout_height="49.3dp"
+        android:layout_gravity=""
+        android:background="#c4792f"
+        android:text="삭제"
+        android:visibility="gone"
+        android:textColor="#ffffff" />
 
 </LinearLayout>
