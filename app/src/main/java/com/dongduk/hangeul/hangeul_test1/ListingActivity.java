@@ -1,18 +1,17 @@
 package com.dongduk.hangeul.hangeul_test1;
 
 import android.content.Context;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.ViewStub;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tsengvn.typekit.TypekitContextWrapper;
@@ -72,6 +71,23 @@ public class ListingActivity extends BaseActivity {
         }*/
     }
 
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.btn_vmore_list:
+                final LinearLayout dialogLayout = (LinearLayout) View.inflate(this, R.layout.dialog_viewmore, null);
+                AlertDialog dialog = new AlertDialog.Builder(this)
+                        .setView(dialogLayout)
+                        .show();
+
+                WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+                params.width = WindowManager.LayoutParams.MATCH_PARENT;
+                params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                dialog.getWindow().setAttributes(params);
+                break;
+        }
+    }
+
     private class adapter extends FragmentPagerAdapter {                    //adapter클래스
         public adapter(FragmentManager fm) {
             super(fm);
@@ -83,36 +99,36 @@ public class ListingActivity extends BaseActivity {
                 return null;
             switch (position){              //포지션에 맞는 Fragment찾아서 cur_fragment변수에 대입
                 case 0:
-                    cur_fragment=new page1();
+                    cur_fragment=new page_listing();
                     break;
 
                 case 1:
-                    cur_fragment=new page1();
+                    cur_fragment=new page_listing();
                     break;
 
                 case 2:
-                    cur_fragment=new page1();
+                    cur_fragment=new page_listing();
                     break;
                 case 3:
-                    cur_fragment=new page1();
+                    cur_fragment=new page_listing();
                     break;
                 case 4:
-                    cur_fragment=new page1();
+                    cur_fragment=new page_listing();
                     break;
                 case 5:
-                    cur_fragment=new page1();
+                    cur_fragment=new page_listing();
                     break;
                 case 6:
-                    cur_fragment=new page1();
+                    cur_fragment=new page_listing();
                     break;
                 case 7:
-                    cur_fragment=new page1();
+                    cur_fragment=new page_listing();
                     break;
                 case 8:
-                    cur_fragment=new page1();
+                    cur_fragment=new page_listing();
                     break;
                 case 9:
-                    cur_fragment=new page1();
+                    cur_fragment=new page_listing();
                     break;
             }
 

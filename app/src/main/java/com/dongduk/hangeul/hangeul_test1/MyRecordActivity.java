@@ -1,5 +1,6 @@
 package com.dongduk.hangeul.hangeul_test1;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
@@ -19,6 +20,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.tsengvn.typekit.TypekitContextWrapper;
@@ -27,6 +30,7 @@ public class MyRecordActivity extends BaseActivity implements NavigationView.OnN
 
     private final int MAX_PAGE=10;                         //View Pager의 총 페이지 갯수를 나타내는 변수 선언
     Fragment cur_fragment=new Fragment();   //현재 Viewpager가 가리키는 Fragment를 받을 변수 선언
+    private BackPressCloseHandler backPressCloseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,8 @@ public class MyRecordActivity extends BaseActivity implements NavigationView.OnN
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        backPressCloseHandler = new BackPressCloseHandler(this);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -61,7 +67,7 @@ public class MyRecordActivity extends BaseActivity implements NavigationView.OnN
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            backPressCloseHandler.onBackPressed();
         }
     }
 
@@ -95,7 +101,7 @@ public class MyRecordActivity extends BaseActivity implements NavigationView.OnN
         if (id == R.id.todayWord) {
             mIntent = new Intent(this, MainActivity.class);
             startActivity(mIntent);
-
+            finish();
         } else if (id == R.id.myWord) {
 
         } else if (id == R.id.myRecord) {
@@ -111,6 +117,24 @@ public class MyRecordActivity extends BaseActivity implements NavigationView.OnN
         return true;
     }
 
+    public void onClick(View v) {
+
+        switch (v.getId()) {
+            case R.id.btn_vmore_record:
+                final LinearLayout dialogLayout = (LinearLayout) View.inflate(this, R.layout.dialog_viewmore, null);
+                AlertDialog dialog = new AlertDialog.Builder(this)
+                        //.setTitle("온새미로")
+                        .setView(dialogLayout)
+                        .show();
+
+                WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+                params.width = WindowManager.LayoutParams.MATCH_PARENT;
+                params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                dialog.getWindow().setAttributes(params);
+                break;
+        }
+    }
+
     private class adapter extends FragmentPagerAdapter {                    //adapter클래스
         public adapter(FragmentManager fm) {
             super(fm);
@@ -122,36 +146,36 @@ public class MyRecordActivity extends BaseActivity implements NavigationView.OnN
                 return null;
             switch (position){              //포지션에 맞는 Fragment찾아서 cur_fragment변수에 대입
                 case 0:
-                    cur_fragment=new page1();
+                    cur_fragment=new page_myrecord();
                     break;
 
                 case 1:
-                    cur_fragment=new page1();
+                    cur_fragment=new page_myrecord();
                     break;
 
                 case 2:
-                    cur_fragment=new page1();
+                    cur_fragment=new page_myrecord();
                     break;
                 case 3:
-                    cur_fragment=new page1();
+                    cur_fragment=new page_myrecord();
                     break;
                 case 4:
-                    cur_fragment=new page1();
+                    cur_fragment=new page_myrecord();
                     break;
                 case 5:
-                    cur_fragment=new page1();
+                    cur_fragment=new page_myrecord();
                     break;
                 case 6:
-                    cur_fragment=new page1();
+                    cur_fragment=new page_myrecord();
                     break;
                 case 7:
-                    cur_fragment=new page1();
+                    cur_fragment=new page_myrecord();
                     break;
                 case 8:
-                    cur_fragment=new page1();
+                    cur_fragment=new page_myrecord();
                     break;
                 case 9:
-                    cur_fragment=new page1();
+                    cur_fragment=new page_myrecord();
                     break;
             }
 

@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -22,7 +23,7 @@ import android.widget.Toast;
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    //private CustomDialogActivity mCustomDialog;
+    private BackPressCloseHandler backPressCloseHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,8 @@ public class MainActivity extends BaseActivity
         ViewStub stub = (ViewStub)findViewById(R.id.stub);
         stub.setLayoutResource(R.layout.content_main);
         stub.inflate();
+
+        backPressCloseHandler = new BackPressCloseHandler(this);
     }
 
     public void onClick(View v) {
@@ -67,7 +70,8 @@ public class MainActivity extends BaseActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            //super.onBackPressed();
+            backPressCloseHandler.onBackPressed();
         }
     }
 
@@ -86,15 +90,15 @@ public class MainActivity extends BaseActivity
         int id = item.getItemId();
 
         if (id == R.id.barBtn) {
-            final LinearLayout dialogLayout = (LinearLayout) View.inflate(this, R.layout.activity_custom_dialog, null);
+            final LinearLayout dialogLayout = (LinearLayout) View.inflate(this, R.layout.dialog_saveword, null);
             AlertDialog dialog = new AlertDialog.Builder(this)
                     //.setTitle("온새미로")
                     .setView(dialogLayout)
                     .show();
 
             WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
-            params.width = 950;
-            params.height = 350;
+            params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+            params.height = WindowManager.LayoutParams.WRAP_CONTENT;
             params.alpha = 50;
             dialog.getWindow().setAttributes(params);
             return true;
@@ -116,10 +120,11 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.myWord) {
             mIntent = new Intent(this, MyWordActivity.class);
             startActivity(mIntent);
-
+            finish();
         } else if (id == R.id.myRecord) {
             mIntent = new Intent(this, MyRecordActivity.class);
             startActivity(mIntent);
+            finish();
         } else if (id == R.id.setting) {
 
         }
@@ -132,7 +137,7 @@ public class MainActivity extends BaseActivity
     private View.OnClickListener clickListener = new View.OnClickListener() {
         public void onClick(View v) {
             Toast.makeText(getApplicationContext(), "클릭", Toast.LENGTH_SHORT).show();
-            //mCustomDialog.dismiss();
+
         }
     };
 }
