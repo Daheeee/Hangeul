@@ -2,21 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="360">
-
-    <Space
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="48"/>
+    >
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_weight="264"
         android:layout_height="match_parent"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"
         android:orientation="vertical"
         android:weightSum="348"
         android:id="@+id/back"
         android:background="@drawable/roundcorner">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -34,10 +32,11 @@
             android:layout_weight="241.7"
             android:orientation="horizontal"
             android:weightSum="264">
+
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="54"/>
+                android:layout_weight="54" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -98,13 +97,16 @@
                 android:textAlignment="center"
                 android:textColor="#000000"/>
         </LinearLayout>
+
         <Button
+            android:id="@+id/btn_vmore_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="57.3"
+            android:background="@android:color/transparent"
+            android:onClick="onClick"
             android:text="더보기"
-            android:textColor="#99000000"
-            android:background="@android:color/transparent"/>
+            android:textColor="#99000000" />
 
     </LinearLayout>
 
