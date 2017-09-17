@@ -35,6 +35,7 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
     private Button btnDelete;
     private MenuItem item;
     private MyWordAdapter myWordAdapter;
+    private MyWordAdapter deleteAdapter;
     private RecyclerView recyclerView;
 
 
@@ -98,7 +99,8 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
         recyclerView.setLayoutManager(layoutManager);
         snapHelper.attachToRecyclerView(recyclerView);
 
-        myWordAdapter = new MyWordAdapter(wordList);
+        myWordAdapter = new MyWordAdapter(wordList, false);
+        deleteAdapter = new MyWordAdapter(wordList, true);
 
         recyclerView.setAdapter(myWordAdapter);
 
@@ -179,10 +181,15 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
             if(item.getTitle().equals("수정")){
                 item.setTitle("취소");
                 btnDelete.setVisibility(View.VISIBLE);
+                myWordAdapter.setRadioButton(true);
+                recyclerView.setAdapter(deleteAdapter);
+
             }
             else if(item.getTitle().equals("취소")){
                 item.setTitle("수정");
                 btnDelete.setVisibility(View.GONE);
+                myWordAdapter.setRadioButton(false);
+                recyclerView.setAdapter(myWordAdapter);
             }
 
             return true;
