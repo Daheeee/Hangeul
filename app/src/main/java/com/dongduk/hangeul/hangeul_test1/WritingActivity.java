@@ -1,5 +1,7 @@
 package com.dongduk.hangeul.hangeul_test1;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -45,7 +47,22 @@ public class WritingActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.barBtn:
-                Toast.makeText(WritingActivity.this, "내마음속에 저장^,~", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(WritingActivity.this, "내마음속에 저장^,~", Toast.LENGTH_SHORT).show();
+                dialog = new AlertDialog.Builder(this)
+                        .setMessage("글을 저장합니다")
+
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent mIntent;
+                                mIntent = new Intent(WritingActivity.this, MainActivity.class);
+                                startActivity(mIntent);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("취소", null)
+                        .show();
+
                 return true;
 
             case android.R.id.home:

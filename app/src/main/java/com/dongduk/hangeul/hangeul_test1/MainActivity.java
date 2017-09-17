@@ -18,12 +18,18 @@ import android.view.ViewStub;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private BackPressCloseHandler backPressCloseHandler;
+    TextView tvDateMain, tvWordMain, tvMeaning01, tvMeaning02, tvMeaning03, tvMeaning04;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +53,17 @@ public class MainActivity extends BaseActivity
         stub.inflate();
 
         backPressCloseHandler = new BackPressCloseHandler(this);
+
+        tvDateMain = (TextView) findViewById(R.id.tvDateMain);
+        tvWordMain = (TextView) findViewById(R.id.tvWordMain);
+        tvMeaning01 = (TextView) findViewById(R.id.tvMeaning01);
+        tvMeaning02 = (TextView) findViewById(R.id.tvMeaning02);
+        tvMeaning03 = (TextView) findViewById(R.id.tvMeaning03);
+        tvMeaning04 = (TextView) findViewById(R.id.tvMeaning04);
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd", Locale.KOREA);
+        String currentDateTimeString = df.format(new Date());
+        tvDateMain.setText(currentDateTimeString);
     }
 
     public void onClick(View v) {
@@ -93,7 +110,7 @@ public class MainActivity extends BaseActivity
         if (id == R.id.barBtn) {
             final LinearLayout dialogLayout = (LinearLayout) View.inflate(this, R.layout.dialog_saveword, null);
             AlertDialog dialog = new AlertDialog.Builder(this)
-                    //.setTitle("온새미로")
+                    //.setTitle("살갑다")
                     .setView(dialogLayout)
                     .show();
 

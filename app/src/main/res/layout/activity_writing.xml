@@ -9,25 +9,25 @@
     tools:context="com.dongduk.hangeul.hangeul_test1.WritingActivity">
 
     <TextView
-        android:id="@+id/w_word"
+        android:id="@+id/tvWordWriting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="78dp"
         android:layout_marginBottom="12dp"
+        android:layout_marginTop="78dp"
         android:gravity="center"
-        android:text="온새미로"
+        android:text="살갑다"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="25sp"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/w_mean"
+        android:id="@+id/tvWordMeaning"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
         android:layout_marginBottom="45dp"
-        android:text="자연 그대로, 언제나 변함없이. 가르거나, 쪼개지않고,"
+        android:gravity="center"
+        android:text="집에나 세간 따위가 겉으로 보기 보다 속이 너르다.\n마음씨가 부드럽고 다정스럽다."
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="11.1sp" />

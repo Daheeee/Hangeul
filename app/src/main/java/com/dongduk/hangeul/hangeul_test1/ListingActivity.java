@@ -28,9 +28,6 @@ import java.util.List;
 
 public class ListingActivity extends BaseActivity {
 
-    private final int MAX_PAGE=10;                         //View Pager의 총 페이지 갯수를 나타내는 변수 선언
-    Fragment cur_fragment=new Fragment();   //현재 Viewpager가 가리키는 Fragment를 받을 변수 선언
-
     final int ITEM_SIZE = 5;
 
     @Override
@@ -61,11 +58,11 @@ public class ListingActivity extends BaseActivity {
 
         List<ListingCard> cards = new ArrayList<>();
         ListingCard[] card = new ListingCard[ITEM_SIZE];
-        card[0] = new ListingCard("2017.09.01");
-        card[1] = new ListingCard("2017.09.01");
-        card[2] = new ListingCard("2017.09.01");
-        card[3] = new ListingCard("2017.09.01");
-        card[4] = new ListingCard("2017.09.01");
+        card[0] = new ListingCard("2017.09.17","테\n스\n트\n","입\n니\n다\n","","","","");
+        card[1] = new ListingCard("2017.09.17","하\n하\n","하\n하\n","","","","");
+        card[2] = new ListingCard("2017.09.16","호\n호\n","호\n호\n","","","","");
+        card[3] = new ListingCard("2017.09.14","히\n히\n","히\n히\n","","","","");
+        card[4] = new ListingCard("2017.09.10","헤\n헤\n","헤\n헤\n","","","","");
 
         for (int i = 0; i < ITEM_SIZE; i++) {
             cards.add(card[i]);
@@ -73,8 +70,6 @@ public class ListingActivity extends BaseActivity {
 
         recyclerView.setAdapter(new ListingAdapter(getApplicationContext(), cards, R.layout.activity_listing));
 
-//        ViewPager viewPager = (ViewPager)findViewById(R.id.pager);        //Viewpager 선언 및 초기화
-//        viewPager.setAdapter(new ListingActivity.adapter(getSupportFragmentManager()));
     }
 
     @Override
@@ -102,64 +97,4 @@ public class ListingActivity extends BaseActivity {
 
         }
     }
-
-//    private class adapter extends FragmentPagerAdapter {                    //adapter클래스
-//        public adapter(FragmentManager fm) {
-//            super(fm);
-//        }
-//
-//        @Override
-//        public Fragment getItem(int position) {
-//            if(position<0 || MAX_PAGE<=position)        //가리키는 페이지가 0 이하거나 MAX_PAGE보다 많을 시 null로 리턴
-//                return null;
-//            switch (position){              //포지션에 맞는 Fragment찾아서 cur_fragment변수에 대입
-//                case 0:
-//                    cur_fragment=new page_listing();
-//                    break;
-//
-//                case 1:
-//                    cur_fragment=new page_listing();
-//                    break;
-//
-//                case 2:
-//                    cur_fragment=new page_listing();
-//                    break;
-//                case 3:
-//                    cur_fragment=new page_listing();
-//                    break;
-//                case 4:
-//                    cur_fragment=new page_listing();
-//                    break;
-//                case 5:
-//                    cur_fragment=new page_listing();
-//                    break;
-//                case 6:
-//                    cur_fragment=new page_listing();
-//                    break;
-//                case 7:
-//                    cur_fragment=new page_listing();
-//                    break;
-//                case 8:
-//                    cur_fragment=new page_listing();
-//                    break;
-//                case 9:
-//                    cur_fragment=new page_listing();
-//                    break;
-//            }
-//
-//            return cur_fragment;
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return MAX_PAGE;
-//        }
-//    }
-//
-//    @Override
-//    protected void attachBaseContext(Context newBase) {
-//        super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
-//
-//
-//    }
 }
