@@ -17,6 +17,7 @@ import java.util.List;
 public class MyWordAdapter extends RecyclerView.Adapter<MyWordAdapter.MyViewHolder> {
 
     private List<MyWord> wordList;
+    private boolean radioFlag;
 
     /**
      * View holder class
@@ -40,10 +41,14 @@ public class MyWordAdapter extends RecyclerView.Adapter<MyWordAdapter.MyViewHold
 
     }
 
-    public MyWordAdapter(List<MyWord> countryList) {
+    public MyWordAdapter(List<MyWord> countryList, boolean radioFlag) {
         this.wordList = countryList;
+        this.radioFlag = radioFlag;
     }
 
+    public void setRadioButton(boolean flag){
+        radioFlag = flag;
+    }
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         MyWord myword = wordList.get(position);
@@ -52,16 +57,24 @@ public class MyWordAdapter extends RecyclerView.Adapter<MyWordAdapter.MyViewHold
         holder.desc1.setText(myword.getDesc1());
         holder.desc2.setText(myword.getDesc2());
 
-        holder.radioButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                if(holder.radioButton.isChecked()){
-                    holder.radioButton.setChecked(false);
-                }
+        if(radioFlag == false){
+            holder.radioButton.setVisibility(View.GONE);
+        }else{
+            holder.radioButton.setVisibility(View.VISIBLE);
+        }
 
-            }
-        });
+//        holder.radioButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                if(holder.radioButton.isChecked()){
+//                    holder.radioButton.setChecked(false);
+//                }
+//
+//            }
+//        });
+
 
     }
 
