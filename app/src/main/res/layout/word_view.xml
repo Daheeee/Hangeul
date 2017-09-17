@@ -36,13 +36,13 @@
         android:paddingLeft="21.5dp"
         android:paddingRight="21.5dp">
 
-        <!--<android.support.v7.widget.AppCompatRadioButton-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginBottom="14.7dp"-->
-            <!--android:button="@drawable/radio_btn"-->
-            <!--android:checked="true"-->
-            <!--/>-->
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/radio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14.7dp"
+            android:buttonTint="#c4792f"
+            />
 
 
         <TextView
@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:gravity="center"
+                android:gravity="top"
                 android:textSize="10sp"
                 android:visibility="gone"
                 />
@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:gravity="center"
+                android:gravity="top"
                 android:textSize="10sp"
                 android:visibility="gone"
                />

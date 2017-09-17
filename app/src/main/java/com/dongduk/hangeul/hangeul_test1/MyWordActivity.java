@@ -22,6 +22,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
+import android.widget.Button;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -30,6 +32,11 @@ import java.util.List;
 public class MyWordActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private int prevCenterPos;
+    private Button btnDelete;
+    private MenuItem item;
+    private MyWordAdapter myWordAdapter;
+    private RecyclerView recyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,8 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
         ViewStub stub = (ViewStub)findViewById(R.id.stub);
         stub.setLayoutResource(R.layout.activity_my_word);
         stub.inflate();
+
+        btnDelete = (Button)findViewById(R.id.btnDelete);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -81,7 +90,7 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
         // set up the RecyclerView
-        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
 
         SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
@@ -89,7 +98,7 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
         recyclerView.setLayoutManager(layoutManager);
         snapHelper.attachToRecyclerView(recyclerView);
 
-        MyWordAdapter myWordAdapter = new MyWordAdapter(wordList);
+        myWordAdapter = new MyWordAdapter(wordList);
 
         recyclerView.setAdapter(myWordAdapter);
 
@@ -146,13 +155,15 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
 
 
 
+
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.barbtn, menu);
-        MenuItem item = menu.getItem(0);
+        item = menu.getItem(0);
         item.setTitle("수정");
 
         return true;
@@ -165,6 +176,14 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
         //수정버튼 클릭시
         if (id == R.id.barBtn) {
 
+            if(item.getTitle().equals("수정")){
+                item.setTitle("취소");
+                btnDelete.setVisibility(View.VISIBLE);
+            }
+            else if(item.getTitle().equals("취소")){
+                item.setTitle("수정");
+                btnDelete.setVisibility(View.GONE);
+            }
 
             return true;
         }
