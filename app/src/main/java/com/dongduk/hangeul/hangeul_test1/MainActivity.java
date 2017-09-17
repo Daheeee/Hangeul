@@ -20,10 +20,15 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private BackPressCloseHandler backPressCloseHandler;
+    private FirebaseAuth auth;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,18 @@ public class MainActivity extends BaseActivity
         stub.inflate();
 
         backPressCloseHandler = new BackPressCloseHandler(this);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Name, email address, and profile photo Url
+            String name = user.getDisplayName();
+            String email = user.getEmail();
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getToken() instead.
+            String uid = user.getUid();
+        }
     }
 
     public void onClick(View v) {
@@ -126,7 +143,10 @@ public class MainActivity extends BaseActivity
             startActivity(mIntent);
             finish();
         } else if (id == R.id.setting) {
-
+            auth.getInstance().signOut();
+            Intent sign_intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(sign_intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
