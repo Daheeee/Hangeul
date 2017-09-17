@@ -12,14 +12,15 @@
 
 
     <TextView
-        android:id="@+id/date"
+        android:id="@+id/tvDateMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="45dp"
+        android:layout_marginTop="90dp"
         android:gravity="center"
         android:text="2017.08.21"
-        android:textSize="11sp"
-        android:layout_marginTop="95dp"
-        android:layout_marginBottom="45dp"/>
+        android:textAlignment="center"
+        android:textSize="12sp" />
 
     <!--<android.support.v4.view.ViewPager-->
         <!--android:id="@+id/viewpager"-->
@@ -37,41 +38,43 @@
             <TextView
                 android:id="@+id/tvMeaning04"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="13dp"
-                android:text="가\n르\n거\n나,\n \n쪼\n개\n지\n않\n고,"
+                android:text="마\n음\n씨\n가\n\n부\n드\n럽\n고\n\n다\n스\n럽\n다\n.\n"
                 android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/tvMeaning03"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="13dp"
-                android:text="가\n르\n거\n나,\n \n쪼\n개\n지\n않\n고,"
+                android:text="속\n이\n\n너\n르\n다\n.\n\n"
                 android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/tvMeaning02"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="13dp"
-                android:text="가\n르\n거\n나,\n \n쪼\n개\n지\n않\n고,"
+                android:text="겉\n으\n로\n\n보\n기\n\n보\n다\n\n"
                 android:textSize="14dp" />
 
             <TextView
                 android:id="@+id/tvMeaning01"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="20dp"
-                android:text="자\n연\n그\n대\n로,\n \n언\n제\n나\n변\n함\n없\n이\n"
+                android:text="집\n에\n나\n\n세\n간\n\n따\n위\n가\n\n"
                 android:textSize="14dp" />
 
             <TextView
-                android:id="@+id/tvWord"
+                android:id="@+id/tvWordMain"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="50dp"
-                android:text="온\n새\n미\n로"
+                android:layout_marginRight="70dp"
+                android:text="살\n갑\n다\n"
+                android:textAlignment="center"
+                android:textColor="#000000"
                 android:textSize="48dp"
                 android:textStyle="bold" />
 

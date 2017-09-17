@@ -7,7 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,7 +28,7 @@ public class NetworkTestActivity extends AppCompatActivity {
     TextView tv4;
     TextView tv5;
     Button bt1;
-
+    Button bt2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +36,12 @@ public class NetworkTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_network_test);
 
         tv1 = (TextView) findViewById(R.id.tv1);
+        tv2 = (TextView) findViewById(R.id.tv2);
         bt1 = (Button)findViewById(R.id.bt1);
+        bt2 = (Button)findViewById(R.id.bt2);
 
         ApplicationController application = ApplicationController.getInstance();
-        application.buildNetworkService("0df68920.ngrok.io");
+        application.buildNetworkService("ab2a6169.ngrok.io");
         //application.buildNetworkService("127.0.0.1", 8000);
         networkService = ApplicationController.getInstance().getNetworkService();
 
@@ -50,7 +56,6 @@ public class NetworkTestActivity extends AppCompatActivity {
                         if( response.isSuccessful()) {
                             Word word = response.body();
 
-
                             tv1.setText(word.getWord().toString() + " : " + word.getWordDesc());
                         } else {
                             int StatusCode = response.code();
@@ -63,6 +68,16 @@ public class NetworkTestActivity extends AppCompatActivity {
                         Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
                     }
                 });
+            }
+        });
+
+        bt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd", Locale.KOREA);
+                String currentDateTimeString = df.format(new Date());
+
+                tv2.setText(currentDateTimeString);
             }
         });
     }

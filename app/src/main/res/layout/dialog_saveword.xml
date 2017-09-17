@@ -6,16 +6,16 @@
     >
 
     <TextView
-        android:id="@+id/tvWord"
+        android:id="@+id/tvWordSaved"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="15dp"
         android:gravity="center"
-        android:text="'온새미로'"
+        android:text="'살갑다'"
         android:textAlignment="center"
         android:textColor="#c4792f"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView

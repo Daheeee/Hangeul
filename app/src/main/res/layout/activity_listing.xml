@@ -9,12 +9,12 @@
     tools:context="com.dongduk.hangeul.hangeul_test1.ListingActivity">
 
     <TextView
-        android:id="@+id/word"
+        android:id="@+id/tvWordList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="75dp"
         android:gravity="center"
-        android:text="온새미로"
+        android:text="살갑다"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="24.9sp"
@@ -23,29 +23,24 @@
         tools:layout_editor_absoluteY="0dp" />
 
     <TextView
-        android:id="@+id/meaning"
+        android:id="@+id/tvMeaningList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="54.59"
+        android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="자연 그대로, 언제나 변함없이.\n가르거나 쪼개지 않고"
+        android:text="집에나 세간 따위가 겉으로 보기 보다 속이 너르다.\n마음씨가 부드럽고 다정스럽다."
         android:textAlignment="center"
         android:textColor="#cc000000"
         android:textSize="11.1sp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="0dp" />
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerview_listing"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="348.05"
-        android:background="@android:color/transparent"
-        android:layout_marginTop="33dp"
-        android:layout_marginBottom="97dp"
+        android:layout_height="450dp"
+        android:layout_marginTop="30dp"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="0dp">
-
-    </android.support.v4.view.ViewPager>
+        tools:layout_editor_absoluteY="8dp" />
 
 </LinearLayout>

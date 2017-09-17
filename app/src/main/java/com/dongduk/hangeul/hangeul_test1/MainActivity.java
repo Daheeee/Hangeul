@@ -18,10 +18,15 @@ import android.view.ViewStub;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -29,6 +34,7 @@ public class MainActivity extends BaseActivity
     private BackPressCloseHandler backPressCloseHandler;
     private FirebaseAuth auth;
     private FirebaseUser user;
+    TextView tvDateMain, tvWordMain, tvMeaning01, tvMeaning02, tvMeaning03, tvMeaning04;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +70,17 @@ public class MainActivity extends BaseActivity
             // FirebaseUser.getToken() instead.
             String uid = user.getUid();
         }
+
+        tvDateMain = (TextView) findViewById(R.id.tvDateMain);
+        tvWordMain = (TextView) findViewById(R.id.tvWordMain);
+        tvMeaning01 = (TextView) findViewById(R.id.tvMeaning01);
+        tvMeaning02 = (TextView) findViewById(R.id.tvMeaning02);
+        tvMeaning03 = (TextView) findViewById(R.id.tvMeaning03);
+        tvMeaning04 = (TextView) findViewById(R.id.tvMeaning04);
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd", Locale.KOREA);
+        String currentDateTimeString = df.format(new Date());
+        tvDateMain.setText(currentDateTimeString);
     }
 
     public void onClick(View v) {
@@ -73,6 +90,7 @@ public class MainActivity extends BaseActivity
             case R.id.btnWrite:
                 mIntent = new Intent(this, WritingActivity.class);
                 startActivity(mIntent);
+                finish();
                 break;
             case R.id.btnList:
                 mIntent = new Intent(this, ListingActivity.class);

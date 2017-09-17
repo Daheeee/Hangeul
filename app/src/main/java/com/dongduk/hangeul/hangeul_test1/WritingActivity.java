@@ -1,5 +1,8 @@
 package com.dongduk.hangeul.hangeul_test1;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -7,11 +10,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class WritingActivity extends BaseActivity {
+
+    LinearLayout dialogLayout;
+    AlertDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,19 +47,66 @@ public class WritingActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.barBtn:
-                Toast.makeText(WritingActivity.this, "내마음속에 저장^,~", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(WritingActivity.this, "내마음속에 저장^,~", Toast.LENGTH_SHORT).show();
+                dialog = new AlertDialog.Builder(this)
+                        .setMessage("글을 저장합니다")
+
+                        .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent mIntent;
+                                mIntent = new Intent(WritingActivity.this, MainActivity.class);
+                                startActivity(mIntent);
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("취소", null)
+                        .show();
+
                 return true;
 
-//            case R.id.home:
-//                //Toast.makeText(WritingActivity.this, "뒤로가기", Toast.LENGTH_SHORT).show();
-//                final LinearLayout dialogLayout = (LinearLayout) View.inflate(this, R.layout.activity_custom_dialog, null);
-//                AlertDialog dialog = new AlertDialog.Builder(this)
-//                        //.setTitle("온새미로")
-//                        .setView(dialogLayout)
-//                        .show();
-//                break;
+            case android.R.id.home:
+                dialogLayout = (LinearLayout) View.inflate(this, R.layout.dialog_end_writing, null);
+                dialog = new AlertDialog.Builder(this)
+                        .setView(dialogLayout)
+                        .show();
+
+                WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+                params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+                params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+                dialog.getWindow().setAttributes(params);
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClick(View v){
+        Intent mIntent;
+
+        switch (v.getId()) {
+            case R.id.btn_cancel:
+                dialog.dismiss();
+                break;
+            case R.id.btn_end_writing:
+                mIntent = new Intent(this, MainActivity.class);
+                startActivity(mIntent);
+                finish();
+                break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        dialogLayout = (LinearLayout) View.inflate(this, R.layout.dialog_end_writing, null);
+        dialog = new AlertDialog.Builder(this)
+                .setView(dialogLayout)
+                .show();
+
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        params.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        dialog.getWindow().setAttributes(params);
+
     }
 }

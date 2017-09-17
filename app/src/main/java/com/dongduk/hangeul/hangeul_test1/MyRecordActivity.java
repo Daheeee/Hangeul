@@ -15,6 +15,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSnapHelper;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,10 +30,12 @@ import android.widget.TextView;
 
 import com.tsengvn.typekit.TypekitContextWrapper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyRecordActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener{
 
-    private final int MAX_PAGE=10;                         //View Pager의 총 페이지 갯수를 나타내는 변수 선언
-    Fragment cur_fragment=new Fragment();   //현재 Viewpager가 가리키는 Fragment를 받을 변수 선언
+    final int ITEM_SIZE = 5;
     private BackPressCloseHandler backPressCloseHandler;
 
     @Override
@@ -57,8 +63,29 @@ public class MyRecordActivity extends BaseActivity implements NavigationView.OnN
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ViewPager viewPager=(ViewPager)findViewById(R.id.pager);        //Viewpager 선언 및 초기화
-        viewPager.setAdapter(new adapter(getSupportFragmentManager()));
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview_record);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerView.setHasFixedSize(true);
+
+        SnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(recyclerView);
+
+        recyclerView.setLayoutManager(layoutManager);
+        snapHelper.attachToRecyclerView(recyclerView);
+
+        List<MyRecordCard> cards = new ArrayList<>();
+        MyRecordCard[] card = new MyRecordCard[ITEM_SIZE];
+        card[0] = new MyRecordCard("2017.09.17", "살\n갑\n다\n","날\n\n보\n는\n\n그\n\n아\n이\n의\n\n표\n정\n이\n","살\n갑\n다\n.\n\n마\n음\n\n속\n에\n\n","꽃\n\n한\n송\n이\n가\n\n폈\n다\n.\n","");
+        card[1] = new MyRecordCard("2017.09.15", "미\n쁘\n다\n","여\n기\n저\n기\n\n눈\n치\n를\n\n살\n피\n는\n","모\n습\n이\n\n도\n무\n지\n\n미\n쁘\n게\n","보\n이\n지\n\n않\n는\n다\n.\n","");
+        card[2] = new MyRecordCard("2017.09.10", "여\n우\n비\n","한\n여\n름\n에\n\n예\n상\n치\n도\n못\n한\n","여\n우\n비\n를\n\n만\n났\n다\n.\n ","내\n\n마\n음\n도\n\n보\n슬\n보\n슬\n","");
+        card[3] = new MyRecordCard("2017.09.02", "주\n니\n","오\n늘\n도\n\n어\n제\n와\n\n똑\n같\n은\n","반\n복\n되\n는\n\n하\n루\n에\n","밀\n려\n오\n는\n\n주\n니\n를\n\n떨\n치\n기\n ","힘\n들\n다\n");
+        card[4] = new MyRecordCard("2017.08.30", "허\n출\n하\n다\n","과\n제\n를\n\n하\n다\n\n한\n끼\n도\n","먹\n지\n\n못\n했\n다\n.\n\n허\n출\n하\n다\n.\n","","");
+
+        for (int i = 0; i < ITEM_SIZE; i++) {
+            cards.add(card[i]);
+        }
+
+        recyclerView.setAdapter(new MyRecordAdapter(getApplicationContext(), cards, R.layout.activity_my_record));
     }
 
     @Override
@@ -132,59 +159,6 @@ public class MyRecordActivity extends BaseActivity implements NavigationView.OnN
                 params.height = WindowManager.LayoutParams.WRAP_CONTENT;
                 dialog.getWindow().setAttributes(params);
                 break;
-        }
-    }
-
-    private class adapter extends FragmentPagerAdapter {                    //adapter클래스
-        public adapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            if(position<0 || MAX_PAGE<=position)        //가리키는 페이지가 0 이하거나 MAX_PAGE보다 많을 시 null로 리턴
-                return null;
-            switch (position){              //포지션에 맞는 Fragment찾아서 cur_fragment변수에 대입
-                case 0:
-                    cur_fragment=new page_myrecord();
-                    break;
-
-                case 1:
-                    cur_fragment=new page_myrecord();
-                    break;
-
-                case 2:
-                    cur_fragment=new page_myrecord();
-                    break;
-                case 3:
-                    cur_fragment=new page_myrecord();
-                    break;
-                case 4:
-                    cur_fragment=new page_myrecord();
-                    break;
-                case 5:
-                    cur_fragment=new page_myrecord();
-                    break;
-                case 6:
-                    cur_fragment=new page_myrecord();
-                    break;
-                case 7:
-                    cur_fragment=new page_myrecord();
-                    break;
-                case 8:
-                    cur_fragment=new page_myrecord();
-                    break;
-                case 9:
-                    cur_fragment=new page_myrecord();
-                    break;
-            }
-
-            return cur_fragment;
-        }
-
-        @Override
-        public int getCount() {
-            return MAX_PAGE;
         }
     }
 
