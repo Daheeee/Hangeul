@@ -34,7 +34,8 @@ public class MainActivity extends BaseActivity
     private BackPressCloseHandler backPressCloseHandler;
     private FirebaseAuth auth;
     private FirebaseUser user;
-    TextView tvDateMain, tvWordMain, tvMeaning01, tvMeaning02, tvMeaning03, tvMeaning04;
+    String email;
+    TextView tvDateMain, tvWordMain, tvMeaning01, tvMeaning02, tvMeaning03, tvMeaning04, tvEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +64,7 @@ public class MainActivity extends BaseActivity
         if (user != null) {
             // Name, email address, and profile photo Url
             String name = user.getDisplayName();
-            String email = user.getEmail();
+            email = user.getEmail();
 
             // The user's ID, unique to the Firebase project. Do NOT use this value to
             // authenticate with your backend server, if you have one. Use
@@ -77,6 +78,9 @@ public class MainActivity extends BaseActivity
         tvMeaning02 = (TextView) findViewById(R.id.tvMeaning02);
         tvMeaning03 = (TextView) findViewById(R.id.tvMeaning03);
         tvMeaning04 = (TextView) findViewById(R.id.tvMeaning04);
+        tvEmail = (TextView)navigationView.getHeaderView(0).findViewById(R.id.tvUserId);
+
+        tvEmail.setText(email);
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd", Locale.KOREA);
         String currentDateTimeString = df.format(new Date());
