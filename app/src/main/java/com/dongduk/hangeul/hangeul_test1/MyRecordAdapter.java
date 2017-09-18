@@ -25,6 +25,8 @@ public class MyRecordAdapter extends RecyclerView.Adapter<MyRecordAdapter.ViewHo
     List<MyRecordCard> cards;
     int item_layout;
 
+
+
     public MyRecordAdapter(Context context, List<MyRecordCard> cards, int item_layout) {
         this.context = context;
         this.cards = cards;
@@ -46,17 +48,25 @@ public class MyRecordAdapter extends RecyclerView.Adapter<MyRecordAdapter.ViewHo
         holder.tvContentRecord02.setText(card.getTvContentRecord02());
         holder.tvContentRecord03.setText(card.getTvContentRecord03());
         holder.tvContentRecord04.setText(card.getTvContentRecord04());
-        holder.cardview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, card.getTvWordRecord(), Toast.LENGTH_SHORT).show();
-            }
-        });
+//        holder.cardview.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//                int p = getLayoutPosition();
+//                Toast.makeText(context, position, Toast.LENGTH_SHORT).show();
+//                //onItemRemove(cards.get(position));
+//                return true;
+//            }
+//        });
     }
 
     @Override
     public int getItemCount() {
         return this.cards.size();
+    }
+
+    public void onItemRemove(int position) {
+        cards.remove(position);
+        notifyItemRemoved(position);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -68,10 +78,13 @@ public class MyRecordAdapter extends RecyclerView.Adapter<MyRecordAdapter.ViewHo
         TextView tvContentRecord03;
         TextView tvContentRecord04;
         Button btnVmoveRecord;
+        Button btnDeleteRecord;
         CardView cardview;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
+
             tvDateRecord = (TextView) itemView.findViewById(R.id.tvDateRecord);
             tvWordRecord = (TextView) itemView.findViewById(R.id.tvWordRecord);
             tvContentRecord01 = (TextView) itemView.findViewById(R.id.tvContentRecord01);
@@ -79,7 +92,19 @@ public class MyRecordAdapter extends RecyclerView.Adapter<MyRecordAdapter.ViewHo
             tvContentRecord03 = (TextView) itemView.findViewById(R.id.tvContentRecord03);
             tvContentRecord04 = (TextView) itemView.findViewById(R.id.tvContentRecord04);
             btnVmoveRecord = (Button) itemView.findViewById(R.id.btn_vmore_record);
+            //btnDeleteRecord = (Button) v.findViewById(R.id.btnDeleteRecord);
             cardview = (CardView) itemView.findViewById(R.id.cv_myrecord);
+
+            cardview.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                int p = getLayoutPosition();
+                //System.out.println("LongClick: "+p);
+                onItemRemove(p);
+                //btnDeleteRecord.setVisibility(View.VISIBLE);
+                return true;
+            }
+        });
         }
     }
 

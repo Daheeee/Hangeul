@@ -67,6 +67,7 @@ public class MyRecordActivity extends BaseActivity implements NavigationView.OnN
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setHasFixedSize(true);
 
+
         SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(recyclerView);
 
