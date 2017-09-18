@@ -78,10 +78,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener{
                     // Splash(로딩화면) 띄우기
                     //startActivity(new Intent(LoginActivity.this, Splash.class));
 
-                    Intent it = new Intent(LoginActivity.this, MainActivity.class);
+                    //Intent it = new Intent(LoginActivity.this, MainActivity.class);
                     //넘겨줄 데이터의 key와 value
-                    it.putExtra("user", user.getUid());
-                    startActivity(it);
+                    //it.putExtra("user", user.getUid());
+                    //startActivity(it);
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");

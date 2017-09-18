@@ -21,6 +21,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -29,7 +32,10 @@ public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private BackPressCloseHandler backPressCloseHandler;
-    TextView tvDateMain, tvWordMain, tvMeaning01, tvMeaning02, tvMeaning03, tvMeaning04;
+    private FirebaseAuth auth;
+    private FirebaseUser user;
+    String email;
+    TextView tvDateMain, tvWordMain, tvMeaning01, tvMeaning02, tvMeaning03, tvMeaning04, tvEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +60,27 @@ public class MainActivity extends BaseActivity
 
         backPressCloseHandler = new BackPressCloseHandler(this);
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Name, email address, and profile photo Url
+            String name = user.getDisplayName();
+            email = user.getEmail();
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getToken() instead.
+            String uid = user.getUid();
+        }
+
         tvDateMain = (TextView) findViewById(R.id.tvDateMain);
         tvWordMain = (TextView) findViewById(R.id.tvWordMain);
         tvMeaning01 = (TextView) findViewById(R.id.tvMeaning01);
         tvMeaning02 = (TextView) findViewById(R.id.tvMeaning02);
         tvMeaning03 = (TextView) findViewById(R.id.tvMeaning03);
         tvMeaning04 = (TextView) findViewById(R.id.tvMeaning04);
+        tvEmail = (TextView)navigationView.getHeaderView(0).findViewById(R.id.tvUserId);
+
+        tvEmail.setText(email);
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd", Locale.KOREA);
         String currentDateTimeString = df.format(new Date());
@@ -110,7 +131,7 @@ public class MainActivity extends BaseActivity
         if (id == R.id.barBtn) {
             final LinearLayout dialogLayout = (LinearLayout) View.inflate(this, R.layout.dialog_saveword, null);
             AlertDialog dialog = new AlertDialog.Builder(this)
-                    //.setTitle("살갑다")
+                    //.setTitle("온새미로")
                     .setView(dialogLayout)
                     .show();
 
@@ -144,6 +165,10 @@ public class MainActivity extends BaseActivity
             startActivity(mIntent);
             finish();
         } else if (id == R.id.setting) {
+            auth.getInstance().signOut();
+            Intent sign_intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(sign_intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

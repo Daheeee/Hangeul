@@ -68,7 +68,7 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
 
         List<MyWord> wordList = new ArrayList<>();
         wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
+        wordList.add(new MyWord("09.12", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
         wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
         wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
         wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
