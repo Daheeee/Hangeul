@@ -76,7 +76,7 @@ public class MyRecordActivity extends BaseActivity implements NavigationView.OnN
 
         List<MyRecordCard> cards = new ArrayList<>();
         MyRecordCard[] card = new MyRecordCard[ITEM_SIZE];
-        card[0] = new MyRecordCard("2017.09.17", "살\n갑\n다\n","날\n\n보\n는\n\n그\n\n아\n이\n의\n\n표\n정\n이\n","살\n갑\n다\n.\n\n마\n음\n\n속\n에\n\n","꽃\n\n한\n송\n이\n가\n\n폈\n다\n.\n","");
+        card[0] = new MyRecordCard("2017.09.20", "살\n갑\n다\n","날\n\n보\n는\n\n그\n\n아\n이\n의\n\n표\n정\n이\n","살\n갑\n다\n.\n\n마\n음\n\n속\n에\n\n","꽃\n\n한\n송\n이\n가\n\n폈\n다\n.\n","");
         card[1] = new MyRecordCard("2017.09.15", "미\n쁘\n다\n","여\n기\n저\n기\n\n눈\n치\n를\n\n살\n피\n는\n","모\n습\n이\n\n도\n무\n지\n\n미\n쁘\n게\n","보\n이\n지\n\n않\n는\n다\n.\n","");
         card[2] = new MyRecordCard("2017.09.10", "여\n우\n비\n","한\n여\n름\n에\n\n예\n상\n치\n도\n못\n한\n","여\n우\n비\n를\n\n만\n났\n다\n.\n ","내\n\n마\n음\n도\n\n보\n슬\n보\n슬\n","");
         card[3] = new MyRecordCard("2017.09.02", "주\n니\n","오\n늘\n도\n\n어\n제\n와\n\n똑\n같\n은\n","반\n복\n되\n는\n\n하\n루\n에\n","밀\n려\n오\n는\n\n주\n니\n를\n\n떨\n치\n기\n ","힘\n들\n다\n");
