@@ -47,7 +47,6 @@ public class WritingActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.barBtn:
-                //Toast.makeText(WritingActivity.this, "내마음속에 저장^,~", Toast.LENGTH_SHORT).show();
                 dialog = new AlertDialog.Builder(this)
                         .setMessage("글을 저장합니다")
 

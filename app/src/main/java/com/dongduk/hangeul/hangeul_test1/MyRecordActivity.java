@@ -5,9 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -86,7 +83,9 @@ public class MyRecordActivity extends BaseActivity implements NavigationView.OnN
             cards.add(card[i]);
         }
 
-        recyclerView.setAdapter(new MyRecordAdapter(getApplicationContext(), cards, R.layout.activity_my_record));
+        MyRecordAdapter mAdapter = new MyRecordAdapter(getApplicationContext(), cards, R.layout.activity_my_record);
+
+        recyclerView.setAdapter(mAdapter);
     }
 
     @Override
