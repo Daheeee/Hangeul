@@ -17,11 +17,13 @@ import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SnapHelper;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -37,7 +39,8 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
     private MyWordAdapter myWordAdapter;
     private MyWordAdapter deleteAdapter;
     private RecyclerView recyclerView;
-
+    private List<MyWord> wordList;
+    int centerPos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,18 +68,16 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-        List<MyWord> wordList = new ArrayList<>();
-        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.12", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
+        wordList = new ArrayList<>();
+        wordList.add(new MyWord("       ", "", "", ""));
+        wordList.add(new MyWord("       ", "", "", ""));
+        wordList.add(new MyWord("09.20", "갈\n무\n리\n", "물\n건\n을\n\n잘\n\n정\n돈\n하\n여\n\n간\n수\n함.", "일\n을\n\n끝\n맺\n음."));
+        wordList.add(new MyWord("09.18", "가\n시\n버\n시\n", "부\n부\n를\n\n속\n되\n게", "이\n르\n는\n\n말."));
+        wordList.add(new MyWord("09.14", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
+        wordList.add(new MyWord("08.20", "꽃\n샘\n", " ", "봄\n철\n\n꽃\n이\n\n필\n\n무\n렵\n의\n\n추\n위."));
+        wordList.add(new MyWord("08.13", "모\n가\n\n", "인\n부\n나\n\n광\n대\n등\n의\n\n우\n두\n머\n리.", "낮\n은\n\n패\n의\n\n우\n두\n머\n리"));
+        wordList.add(new MyWord("09.09", "살\n갑\n다\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
+        wordList.add(new MyWord("09.09", "꽃\n샘\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
         wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
         wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
         wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
@@ -85,7 +86,10 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
         wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
         wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
         wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-
+        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
+        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
+        wordList.add(new MyWord("       ", "", "", ""));
+        wordList.add(new MyWord("       ", "", "", ""));
 
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -113,14 +117,14 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
 
                 int center = recyclerView.getWidth() / 2;
                 View centerView = recyclerView.findChildViewUnder(center, recyclerView.getTop());
-                int centerPos = recyclerView.getChildAdapterPosition(centerView);
+                centerPos = recyclerView.getChildAdapterPosition(centerView);
 
                 if (prevCenterPos != centerPos) {
                     // dehighlight the previously highlighted view
                     View prevView = recyclerView.getLayoutManager().findViewByPosition(prevCenterPos);
 
                     if (prevView != null) {
-
+                        Log.d("preview", Integer.toString(prevCenterPos));
                         TextView textView = (TextView) prevView.findViewById(R.id.tvMyWord);
                         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
                         textView.setTypeface(textView.getTypeface(), Typeface.NORMAL);
@@ -129,13 +133,20 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
                         TextView desc1 = (TextView)prevView.findViewById(R.id.tvDesc1);
                         TextView desc2 = (TextView)prevView.findViewById(R.id.tvDesc2);
 
+                        RadioButton radioButton = (RadioButton)prevView.findViewById(R.id.radio);
+
+
                         desc1.setVisibility(View.GONE);
                         desc2.setVisibility(View.GONE);
+
+
+
 
                     }
 
                     // highlight view in the middle
                     if (centerView != null) {
+                        Log.d("centerView", Integer.toString(centerPos));
                         TextView textView = (TextView) centerView.findViewById(R.id.tvMyWord);
 
                         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
@@ -154,6 +165,15 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
             }
         });
 
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteAdapter.onItemRemove(centerPos);
+                myWordAdapter.onItemRemove(centerPos);
+
+            }
+        });
 
 
 
@@ -227,4 +247,34 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
         return true;
 
     }
+
+//    AdapterView.OnItemLongClickListener longClickListener = new AdapterView.OnItemLongClickListener() {
+//        @Override
+//        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//            final int pos = position;
+//
+//            delete_builder.setTitle("삭제 확인");
+//            delete_builder.setMessage("삭제하시겠습니까?");
+//            delete_builder.setPositiveButton("확인버튼",
+//                    new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            wordList.remove(pos);
+//
+//                            myWordAdapter.notifyDataSetChanged();
+//                            deleteAdapter.notifyDataSetChanged();
+//                        }
+//                    }
+//            );
+//            delete_builder.setNegativeButton("취소버튼", null);
+//
+//            Dialog dlg = delete_builder.create();
+//
+//            dlg.setCanceledOnTouchOutside(true);
+//            dlg.show();
+//
+//            return true;
+//        }
+//    };
 }

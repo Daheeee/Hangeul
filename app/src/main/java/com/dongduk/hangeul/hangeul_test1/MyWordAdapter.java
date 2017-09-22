@@ -2,6 +2,7 @@ package com.dongduk.hangeul.hangeul_test1;
 
 import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,8 +58,11 @@ public class MyWordAdapter extends RecyclerView.Adapter<MyWordAdapter.MyViewHold
         holder.desc1.setText(myword.getDesc1());
         holder.desc2.setText(myword.getDesc2());
 
-
-        if(radioFlag == false){
+        Log.d("wordAdapter", Integer.toString(wordList.size()));
+        if(position == 0 || position == 1 || position == wordList.size()-1 || position == wordList.size() - 2){
+            holder.radioButton.setVisibility(View.GONE);
+        }
+        else if(radioFlag == false){
             holder.radioButton.setVisibility(View.GONE);
         }else{
             holder.radioButton.setVisibility(View.VISIBLE);
@@ -81,6 +85,11 @@ public class MyWordAdapter extends RecyclerView.Adapter<MyWordAdapter.MyViewHold
     @Override
     public int getItemCount() {
         return wordList.size();
+    }
+
+    public void onItemRemove(int position) {
+        wordList.remove(position);
+        notifyItemRemoved(position);
     }
 
     @Override

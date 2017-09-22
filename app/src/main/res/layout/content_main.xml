@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="13dp"
-                android:text="마\n음\n씨\n가\n\n부\n드\n럽\n고\n\n다\n스\n럽\n다\n.\n"
+                android:text=" "
                 android:textSize="14dp" />
 
             <TextView
@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="13dp"
-                android:text="속\n이\n\n너\n르\n다\n.\n\n"
+                android:text=" "
                 android:textSize="14dp" />
 
             <TextView
@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="13dp"
-                android:text="겉\n으\n로\n\n보\n기\n\n보\n다\n\n"
+                android:text="간\n수\n함.\n\n일\n을\n\n끝\n맺\n음\n\n"
                 android:textSize="14dp" />
 
             <TextView
@@ -64,7 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="20dp"
-                android:text="집\n에\n나\n\n세\n간\n\n따\n위\n가\n\n"
+                android:text="물\n건\n을\n\n잘\n\n정\n리\n하\n여\n"
                 android:textSize="14dp" />
 
             <TextView
@@ -72,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="70dp"
-                android:text="살\n갑\n다\n"
+                android:text="갈\n무\n리\n"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="48dp"
