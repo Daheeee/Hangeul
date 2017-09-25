@@ -124,9 +124,10 @@ public void bt2_Click(){
     //POST
     Writing writing = new Writing();
 
+
     writing.setUid("test");
     writing.setWid(5);
-    writing.setDate(new Date());
+    writing.setDate("2017-09-20");
     writing.setWriting("test");
 
     Call<Writing> postCall = networkService.post_writing(writing);

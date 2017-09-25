@@ -136,6 +136,7 @@ public class MainActivity extends BaseActivity
                     SharedPreferences.Editor editor = pr.edit();
 
                     editor.putString("word", word.getWord());
+                    editor.putString("wid", Long.toString(word.getWid()));
 //        editor.putString(tvWordMain.getText().toString(), tvMeaning01.getText().toString() + tvMeaning02.getText().toString() + tvMeaning03.getText().toString() + tvMeaning04.getText().toString());
                     editor.putString(word.getWord(), word.getWordDesc());
 
