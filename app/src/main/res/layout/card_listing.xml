@@ -45,7 +45,8 @@
                     android:layout_width="40dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
 
                 <LinearLayout
                     android:layout_width="160dp"
@@ -60,7 +61,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:textAlignment="center"
-                        android:textColor="#000000" />
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvContentList04"
@@ -69,7 +71,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="내\n\n마\n음\n은\n\n너\n와\n\n그\n린\n내\n가"
-                        android:textColor="#000000" />
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvContentList03"
@@ -78,7 +81,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="너\n를\n\n만\n날\n\n때\n면\n\n소\n마\n소\n마\n하\n는\n"
-                        android:textColor="#000000" />
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
 
                     <TextView
                         android:id="@+id/tvContentList02"
@@ -87,7 +91,8 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="너\n와\n\n내\n가\n\n시\n나\n브\n로\n\n알\n아\n가\n고\n"
-                        android:textColor="#000000" />
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <TextView
@@ -96,7 +101,8 @@
                     android:layout_height="wrap_content"
                     android:text="너\n와\n\n내\n가\n\n시\n나\n브\n로\n\n알\n아\n가\n고\n"
                     android:textAlignment="center"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 

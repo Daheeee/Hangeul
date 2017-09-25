@@ -9,6 +9,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -27,6 +28,8 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -216,10 +219,17 @@ public class MainActivity extends BaseActivity
         if (id == R.id.barBtn) {
             final LinearLayout dialogLayout = (LinearLayout) View.inflate(this, R.layout.dialog_saveword, null);
 
+            TextView title = new TextView(this);
+            title.setText(tvWordMain.getText());
+            title.setGravity(Gravity.CENTER);
+            title.setTextColor(Color.parseColor("#c4792f"));
+
             AlertDialog dialog = new AlertDialog.Builder(this)
                     .setTitle(tvWordMain.getText())
                     .setView(dialogLayout)
                     .show();
+
+            //dialog.setCustomTitle(title);
 
             WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
             params.width = WindowManager.LayoutParams.WRAP_CONTENT;

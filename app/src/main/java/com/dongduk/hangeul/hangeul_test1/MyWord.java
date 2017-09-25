@@ -6,7 +6,6 @@ package com.dongduk.hangeul.hangeul_test1;
 
 public class MyWord {
 
-
     private String date;
     private String word;
     private String desc1;

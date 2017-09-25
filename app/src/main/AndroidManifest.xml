@@ -50,23 +50,15 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-<<<<<<< HEAD
-        <activity android:name=".NetworkTestActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-=======
-        <activity android:name=".LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar">
->>>>>>> 37c3bd44f000fca0fee1de26ce8fc5f646154133
+        <activity android:name=".NetworkTestActivity" />
 
-        </activity>
         <activity android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
         <activity android:name=".RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar">
-  ㅈ        <meta-data
+          <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LoginActivity" />
         </activity>
