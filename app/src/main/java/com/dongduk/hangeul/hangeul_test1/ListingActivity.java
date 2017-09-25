@@ -1,6 +1,7 @@
 package com.dongduk.hangeul.hangeul_test1;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -23,12 +24,16 @@ import android.widget.Toast;
 
 import com.tsengvn.typekit.TypekitContextWrapper;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListingActivity extends BaseActivity {
 
     final int ITEM_SIZE = 5;
+
+    TextView tvWordList, tvMeaningList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,13 @@ public class ListingActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        tvWordList = (TextView) findViewById(R.id.tvWordList);
+        tvMeaningList = (TextView) findViewById(R.id.tvMeaningList);
+
+        SharedPreferences pr = getSharedPreferences("pr", MODE_PRIVATE);
+        tvWordList.setText(pr.getString("word", ""));
+        tvMeaningList.setText(pr.getString(tvWordList.getText().toString(), ""));
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview_listing);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);

@@ -25,7 +25,7 @@ public interface NetworkService {
     @DELETE("/api/words/{pk}/")
     Call<Word> delete_word(@Path("pk") int pk);
 
-    @GET("/api/words/")
+    @GET("/words/")
     Call<Word> get_word();
 
     @GET("/api/versions/{pk}/")

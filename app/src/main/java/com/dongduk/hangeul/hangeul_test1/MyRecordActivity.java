@@ -98,25 +98,25 @@ public class MyRecordActivity extends BaseActivity implements NavigationView.OnN
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.barbtn, menu);
-        MenuItem item = menu.getItem(0);
-        item.setTitle("수정");
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.barBtn) {    // 수정버튼
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.barbtn, menu);
+//        MenuItem item = menu.getItem(0);
+//        item.setTitle("수정");
+//
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//
+//        if (id == R.id.barBtn) {    // 수정버튼
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -130,11 +130,11 @@ public class MyRecordActivity extends BaseActivity implements NavigationView.OnN
             startActivity(mIntent);
             finish();
         } else if (id == R.id.myWord) {
-
+            mIntent = new Intent(this, MyWordActivity.class);
+            startActivity(mIntent);
+            finish();
         } else if (id == R.id.myRecord) {
             // 현재 페이지
-//            mIntent = new Intent(this, MyRecordActivity.class);
-//            startActivity(mIntent);
         } else if (id == R.id.setting) {
 
         }

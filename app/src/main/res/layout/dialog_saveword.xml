@@ -12,7 +12,6 @@
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="'살갑다'"
         android:textAlignment="center"
         android:textColor="#c4792f"
         android:textSize="18sp"

@@ -41,8 +41,8 @@ public class NetworkTestActivity extends AppCompatActivity {
         bt2 = (Button)findViewById(R.id.bt2);
 
         ApplicationController application = ApplicationController.getInstance();
-        application.buildNetworkService("ab2a6169.ngrok.io");
-        //application.buildNetworkService("127.0.0.1", 8000);
+        //application.buildNetworkService("ab2a6169.ngrok.io");
+        application.buildNetworkService("54.237.215.221", 8000);
         networkService = ApplicationController.getInstance().getNetworkService();
 
         bt1.setOnClickListener(new View.OnClickListener() {

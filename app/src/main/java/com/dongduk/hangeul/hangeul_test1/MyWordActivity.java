@@ -139,9 +139,6 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
                         desc1.setVisibility(View.GONE);
                         desc2.setVisibility(View.GONE);
 
-
-
-
                     }
 
                     // highlight view in the middle
@@ -233,7 +230,7 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
 
 
         } else if (id == R.id.myWord) {
-
+            //현재페이지
         } else if (id == R.id.myRecord) {
             mIntent = new Intent(this, MyRecordActivity.class);
             startActivity(mIntent);
