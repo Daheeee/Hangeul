@@ -19,7 +19,7 @@ public interface NetworkService {
     @POST("/writings/")
     Call<Writing> post_writing(@Body Writing writing);
 
-    @GET("/writings/{pk}/")
+    @GET("/wiritings/{pk}")
     Call<List<Writing>> get_writings(@Path("pk") int pk);
 
     @PATCH("/api/words/{pk}/")
