@@ -71,7 +71,7 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
         wordList = new ArrayList<>();
         wordList.add(new MyWord("       ", "", "", ""));
         wordList.add(new MyWord("       ", "", "", ""));
-        wordList.add(new MyWord("09.20", "갈\n무\n리\n", "물\n건\n을\n\n잘\n\n정\n돈\n하\n여\n\n간\n수\n함.", "일\n을\n\n끝\n맺\n음."));
+        wordList.add(new MyWord("09.20", "살\n갑\n다\n", "집\n에\n나\n\n세\n간\n\n따\n위\n가", "겉\n으\n로\n\n보\n기\n\n보\n다\n속\n이\n\n너\n르\n다."));
         wordList.add(new MyWord("09.18", "가\n시\n버\n시\n", "부\n부\n를\n\n속\n되\n게", "이\n르\n는\n\n말."));
         wordList.add(new MyWord("09.14", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
         wordList.add(new MyWord("08.20", "꽃\n샘\n", " ", "봄\n철\n\n꽃\n이\n\n필\n\n무\n렵\n의\n\n추\n위."));

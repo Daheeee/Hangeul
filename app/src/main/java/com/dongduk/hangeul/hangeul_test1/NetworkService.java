@@ -16,8 +16,11 @@ import retrofit2.http.Path;
 
 
 public interface NetworkService {
-    @POST("/words/")
-    Call<Word> post_word(@Body MyWord word);
+    @POST("/writings/")
+    Call<Writing> post_writing(@Body Writing writing);
+
+    @GET("/writings/{pk}/")
+    Call<List<Writing>> get_writings(@Path("pk") int pk);
 
     @PATCH("/api/words/{pk}/")
     Call<Word> patch_word(@Path("pk") int pk, @Body MyWord word);

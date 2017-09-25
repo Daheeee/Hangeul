@@ -97,9 +97,9 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        registerUser();
+//        int id = item.getItemId();
 
+        registerUser();
 
         return super.onOptionsItemSelected(item);
     }
@@ -111,10 +111,12 @@ public class RegisterActivity extends BaseActivity {
         String password = editTextPassword.getText().toString();
         String password2 = editTextRePassword.getText().toString();
 
+        Log.d(TAG, "preshowError");
         if(!(showError(email, password, password2))){
+            Log.d(TAG, "shoError");
             return;
         }
-
+        Log.d(TAG, "register");
 
         progressDialog.setMessage("회원가입을 진행중입니다...");
         progressDialog.show();
@@ -129,8 +131,6 @@ public class RegisterActivity extends BaseActivity {
                                     //user is successfully registered and logged in
                                     //we will start the profile activity here
 
-//                                    Toast.makeText(RegisterActivity.this, "회원가입이 성공하였습니다.", Toast.LENGTH_SHORT).show();
-//                                    mEmailInputLayout.setError("회원가입이 성공하였습니다.");
                                     finish();
                                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                 } else {
@@ -158,16 +158,18 @@ public class RegisterActivity extends BaseActivity {
             mEmailInputLayout.setError("email을 입력해주세요.");
             return false;
         }
-        if (TextUtils.isEmpty(p)) {
+        else if (TextUtils.isEmpty(p)) {
 //            Toast.makeText(LoginActivity.this, "password를 입력해주세요.", Toast.LENGTH_SHORT).show();
             mPasswordInputLayout.setError("password를 입력해주세요.");
             return false;
         }
-        if(TextUtils.isEmpty(p2)) {
+        else if(TextUtils.isEmpty(p2)) {
             mRePasswordInputLayout.setError("password를 재입력해주세요.");
+            return false;
         }
-        if(!p.equals(p2)){
-            mRePasswordInputLayout.setError("password가 일치하지 않습니다. 다시 입력해주세요");
+        else if(!p.equals(p2)){
+            mRePasswordInputLayout.setError("password가 일치하지 않습니다.");
+            return false;
         }
 
         return true;
