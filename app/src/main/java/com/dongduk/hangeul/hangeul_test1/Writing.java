@@ -11,7 +11,7 @@ public class Writing {
     private long rid;
     private long wid;
     private String uid;
-    private Date date;
+    private String date;
     private String writing;
 
 
@@ -39,11 +39,11 @@ public class Writing {
         this.uid = uid;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
