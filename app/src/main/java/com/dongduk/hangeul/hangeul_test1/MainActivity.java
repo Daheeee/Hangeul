@@ -1,8 +1,10 @@
 package com.dongduk.hangeul.hangeul_test1;
 
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -58,6 +60,8 @@ public class MainActivity extends BaseActivity
     String wordMeaning;     // 오늘의 단어 전체 뜻 저장 변수
     int countSpace = 0;
 
+    MyWordDBHelper helper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +85,7 @@ public class MainActivity extends BaseActivity
         stub.inflate();
 
         backPressCloseHandler = new BackPressCloseHandler(this);
+        helper = new MyWordDBHelper(this);
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -133,6 +138,7 @@ public class MainActivity extends BaseActivity
                     editor.putString("word", word.getWord());
 //        editor.putString(tvWordMain.getText().toString(), tvMeaning01.getText().toString() + tvMeaning02.getText().toString() + tvMeaning03.getText().toString() + tvMeaning04.getText().toString());
                     editor.putString(word.getWord(), word.getWordDesc());
+
                     editor.commit();
 
                     for(int i = 0; i < word.getWordDesc().length(); i++) {
@@ -219,10 +225,10 @@ public class MainActivity extends BaseActivity
         if (id == R.id.barBtn) {
             final LinearLayout dialogLayout = (LinearLayout) View.inflate(this, R.layout.dialog_saveword, null);
 
-            TextView title = new TextView(this);
-            title.setText(tvWordMain.getText());
-            title.setGravity(Gravity.CENTER);
-            title.setTextColor(Color.parseColor("#c4792f"));
+//            TextView title = new TextView(this);
+//            title.setText(tvWordMain.getText());
+//            title.setGravity(Gravity.CENTER);
+//            title.setTextColor(Color.parseColor("#c4792f"));
 
             AlertDialog dialog = new AlertDialog.Builder(this)
                     .setTitle(tvWordMain.getText())
@@ -236,6 +242,21 @@ public class MainActivity extends BaseActivity
             params.height = WindowManager.LayoutParams.WRAP_CONTENT;
             params.alpha = 50;
             dialog.getWindow().setAttributes(params);
+
+            SimpleDateFormat df2 = new SimpleDateFormat("MM.dd", Locale.KOREA);
+            String currentDateTimeString2 = df2.format(new Date());
+
+            SQLiteDatabase db = helper.getWritableDatabase();
+
+            ContentValues row = new ContentValues();
+            row.put("date",currentDateTimeString2);
+            row.put("word",tvWordMain.getText().toString());
+            row.put("desc1", wordMeaning);
+            row.put("desc2", wordMeaning);
+
+            db.insert(MyWordDBHelper.TALBE_NAME, null, row);
+            helper.close();
+
             return true;
         }
 

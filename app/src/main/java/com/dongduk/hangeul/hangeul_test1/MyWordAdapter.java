@@ -53,8 +53,22 @@ public class MyWordAdapter extends RecyclerView.Adapter<MyWordAdapter.MyViewHold
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         MyWord myword = wordList.get(position);
+
         holder.date.setText(myword.getDate());
-        holder.myword.setText(myword.getWord());
+
+        String word = myword.getWord();
+        String wordText = "";
+        for(int i=0; i < word.length(); i++) {
+            wordText += word.charAt(i) + "\n";
+        }
+        holder.myword.setText(wordText);
+
+//        String desc = myword.getDesc1();
+//        String descText = "";
+//        for(int j=0; j < desc.length(); j++) {
+//            descText += desc.charAt(j) + "\n";
+//        }
+
         holder.desc1.setText(myword.getDesc1());
         holder.desc2.setText(myword.getDesc2());
 

@@ -6,18 +6,30 @@ package com.dongduk.hangeul.hangeul_test1;
 
 public class MyWord {
 
+    private int _id;
     private String date;
     private String word;
     private String desc1;
-    private String desc2;
+    private  String desc2;
 
-    public MyWord(String date, String word, String desc1, String desc2) {
+    public MyWord() {
+    }
+
+    public MyWord(int _id, String date, String word, String desc1, String desc2) {
+        this._id = _id;
         this.date = date;
         this.word = word;
         this.desc1 = desc1;
         this.desc2 = desc2;
     }
 
+    public int get_id() {
+        return _id;
+    }
+
+    public void set_id(int _id) {
+        this._id = _id;
+    }
 
     public String getDate() {
         return date;
@@ -50,6 +62,4 @@ public class MyWord {
     public void setDesc2(String desc2) {
         this.desc2 = desc2;
     }
-
-
 }

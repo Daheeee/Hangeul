@@ -1,6 +1,8 @@
 package com.dongduk.hangeul.hangeul_test1;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.annotation.NonNull;
@@ -8,6 +10,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -44,6 +47,10 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
 
     private BackPressCloseHandler backPressCloseHandler;
 
+    MyWordDBHelper helper;
+    Cursor cursor;
+    SimpleCursorAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,29 +78,51 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
         navigationView.setNavigationItemSelectedListener(this);
 
         backPressCloseHandler = new BackPressCloseHandler(this);
+        helper = new MyWordDBHelper(this);
 
+        //wordList = new ArrayList<>();
+//        wordList.add(new MyWord("       ", "", "", ""));
+//        wordList.add(new MyWord("       ", "", "", ""));
+//        wordList.add(new MyWord("09.20", "살\n갑\n다\n", "집\n에\n나\n\n세\n간\n\n따\n위\n가", "겉\n으\n로\n\n보\n기\n\n보\n다\n속\n이\n\n너\n르\n다."));
+//        wordList.add(new MyWord("09.18", "가\n시\n버\n시\n", "부\n부\n를\n\n속\n되\n게", "이\n르\n는\n\n말."));
+//        wordList.add(new MyWord("09.14", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
+//        wordList.add(new MyWord("08.20", "꽃\n샘\n", " ", "봄\n철\n\n꽃\n이\n\n필\n\n무\n렵\n의\n\n추\n위."));
+//        wordList.add(new MyWord("08.13", "모\n가\n\n", "인\n부\n나\n\n광\n대\n등\n의\n\n우\n두\n머\n리.", "낮\n은\n\n패\n의\n\n우\n두\n머\n리"));
+//        wordList.add(new MyWord("09.09", "살\n갑\n다\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
+//        wordList.add(new MyWord("09.09", "꽃\n샘\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
+//        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
+//        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
+//        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
+//        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
+//        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
+//        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
+//        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
+//        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
+//        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
+//        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
+//        wordList.add(new MyWord("       ", "", "", ""));
+//        wordList.add(new MyWord("       ", "", "", ""));
+
+        SQLiteDatabase db = helper.getReadableDatabase();
         wordList = new ArrayList<>();
-        wordList.add(new MyWord("       ", "", "", ""));
-        wordList.add(new MyWord("       ", "", "", ""));
-        wordList.add(new MyWord("09.20", "살\n갑\n다\n", "집\n에\n나\n\n세\n간\n\n따\n위\n가", "겉\n으\n로\n\n보\n기\n\n보\n다\n속\n이\n\n너\n르\n다."));
-        wordList.add(new MyWord("09.18", "가\n시\n버\n시\n", "부\n부\n를\n\n속\n되\n게", "이\n르\n는\n\n말."));
-        wordList.add(new MyWord("09.14", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("08.20", "꽃\n샘\n", " ", "봄\n철\n\n꽃\n이\n\n필\n\n무\n렵\n의\n\n추\n위."));
-        wordList.add(new MyWord("08.13", "모\n가\n\n", "인\n부\n나\n\n광\n대\n등\n의\n\n우\n두\n머\n리.", "낮\n은\n\n패\n의\n\n우\n두\n머\n리"));
-        wordList.add(new MyWord("09.09", "살\n갑\n다\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.09", "꽃\n샘\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
-        wordList.add(new MyWord("       ", "", "", ""));
-        wordList.add(new MyWord("       ", "", "", ""));
+
+        Cursor cursor = db.rawQuery("select * from " + MyWordDBHelper.TALBE_NAME, null);
+
+        wordList.add(new MyWord(0,"","","",""));
+        wordList.add(new MyWord(0,"","","",""));
+
+        while (cursor.moveToNext()) {
+            MyWord myWord = new MyWord();
+            myWord.set_id(cursor.getInt(0));
+            myWord.setDate(cursor.getString(1));
+            myWord.setWord(cursor.getString(2));
+            myWord.setDesc1(cursor.getString(3));
+            myWord.setDesc2(cursor.getString(4));
+            wordList.add(myWord);
+        }
+
+        wordList.add(new MyWord(0,"","","",""));
+        wordList.add(new MyWord(0,"","","",""));
 
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
@@ -176,7 +205,30 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
             }
         });
 
+        cursor.close();
+        helper.close();
+
     }
+
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        SQLiteDatabase db = helper.getReadableDatabase();
+//        wordList = new ArrayList<>();
+//
+//        Cursor cursor = db.rawQuery("select * from " + MyWordDBHelper.TALBE_NAME, null);
+//
+//        while (cursor.moveToNext()) {
+//            MyWord myWord = new MyWord();
+//            myWord.set_id(cursor.getInt(0));
+//            myWord.setDate(cursor.getString(1));
+//            myWord.setWord(cursor.getString(2));
+//            myWord.setDesc1(cursor.getString(3));
+//            myWord.setDesc2(cursor.getString(4));
+//            wordList.add(myWord);
+//        }
+//    }
 
     @Override
     public void onBackPressed() {
