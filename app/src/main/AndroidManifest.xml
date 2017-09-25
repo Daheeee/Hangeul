@@ -18,6 +18,10 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity
@@ -46,12 +50,15 @@
             android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
+<<<<<<< HEAD
         <activity android:name=".NetworkTestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+=======
+        <activity android:name=".LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+>>>>>>> 37c3bd44f000fca0fee1de26ce8fc5f646154133
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">

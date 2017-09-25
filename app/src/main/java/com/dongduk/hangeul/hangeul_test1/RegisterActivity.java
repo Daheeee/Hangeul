@@ -53,6 +53,8 @@ public class RegisterActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setTitle("");
+        TextView tvTitle = (TextView)findViewById(R.id.tvTitle);
+        tvTitle.setText("회원가입");
 
         ViewStub stub = (ViewStub)findViewById(R.id.stub);
         stub.setLayoutResource(R.layout.activity_register);

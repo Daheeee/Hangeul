@@ -41,14 +41,14 @@ public class NetworkTestActivity extends AppCompatActivity {
         bt2 = (Button)findViewById(R.id.bt2);
 
         ApplicationController application = ApplicationController.getInstance();
-        //application.buildNetworkService("ab2a6169.ngrok.io");
-        application.buildNetworkService("127.0.0.1", 8000);
+        application.buildNetworkService("ab2a6169.ngrok.io");
+        //application.buildNetworkService("127.0.0.1", 8000);
         networkService = ApplicationController.getInstance().getNetworkService();
 
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Word GET
+                //Restaurant GET
                 Call<Word> getCall = networkService.get_word();
                 getCall.enqueue(new Callback<Word>() {
                     @Override
@@ -74,7 +74,10 @@ public class NetworkTestActivity extends AppCompatActivity {
         bt2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bt2_Click();
+                SimpleDateFormat df = new SimpleDateFormat("yyyy.MM.dd", Locale.KOREA);
+                String currentDateTimeString = df.format(new Date());
+
+                tv2.setText(currentDateTimeString);
             }
         });
     }
@@ -109,35 +112,30 @@ public class NetworkTestActivity extends AppCompatActivity {
 //        });
 //    }
 //
-    public void bt2_Click(){
-        //POST
-        Writing writing = new Writing();
-
-        writing.setUid("test");
-        writing.setWid(5);
-        writing.setDate(new Date());
-        writing.setWriting("test");
-
-        Call<Writing> postCall = networkService.post_writing(writing);
-        postCall.enqueue(new Callback<Writing>() {
-            @Override
-            public void onResponse(Call<Writing> call, Response<Writing> response) {
-                if( response.isSuccessful()) {
-                    tv2.setText("등록");
-
-                } else {
-                    int StatusCode = response.code();
-                    Log.i(ApplicationController.TAG, "Status Code : " + StatusCode);
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<Writing> call, Throwable t) {
-                Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
-            }
-        });
-    }
+//    @OnClick(R.id.bt2)
+//    public void bt2_Click(){
+//        //POST
+//        MyWord word = new MyWord();
+//        //word.set("1.0.0.1");
+//        Call<MyWord> postCall = networkService.post_word(word);
+//        postCall.enqueue(new Callback<MyWord>() {
+//            @Override
+//            public void onResponse(Call<MyWord> call, Response<MyWord> response) {
+//                if( response.isSuccessful()) {
+//                    tv2.setText("등록");
+//                } else {
+//                    int StatusCode = response.code();
+//                    Log.i(ApplicationController.TAG, "Status Code : " + StatusCode);
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<MyWord> call, Throwable t) {
+//                Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
+//            }
+//        });
+//    }
 
 //    @OnClick(R.id.bt3)
 //    public void bt3_click(){
@@ -163,46 +161,36 @@ public class NetworkTestActivity extends AppCompatActivity {
 //        });
 //    }
 
-    public void bt4_click(){
-
-        Call<List<Writing>> getCall = networkService.get_writings(3);
-
-        getCall.enqueue(new Callback<List<Writing>>() {
-            @Override
-            public void onResponse(Call<List<Writing>> call, Response<List<Writing>> response) {
-                if( response.isSuccessful()) {
-                    List<Writing> writingList = response.body();
-
-                    String word_txt = "";
-                    for(Writing writing : writingList){
-                        word_txt += writing.getDate() +
-                                writing.getWriting() +
-                                "\n";
-                    }
-
-                    tv1.setText(word_txt);
-
-                } else {
-                    int StatusCode = response.code();
-                    Log.i(ApplicationController.TAG, "Status Code : " + StatusCode + " Error Message : " + response.errorBody());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<Writing>> call, Throwable t) {
-                Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
-            }
-        });
-    }
+//    @OnClick(R.id.bt4)
+//    public void bt4_click(){
+//        //DELETE
+//        Call<Version> deleteCall = networkService.delete_version(1);
+//        deleteCall.enqueue(new Callback<Version>() {
+//            @Override
+//            public void onResponse(Call<Version> call, Response<Version> response) {
+//                if( response.isSuccessful()) {
+//                    tv4.setText("삭제");
+//                } else {
+//                    int StatusCode = response.code();
+//                    Log.i(ApplicationController.TAG, "Status Code : " + StatusCode);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Version> call, Throwable t) {
+//                Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
+//            }
+//        });
+//    }
 
 //    public void bt1_click(){
 //        //Restaurant GET
-//        Call<List<Writing>> getCall = networkService.get_writings(2);
-//        getCall.enqueue(new Callback<List<Writing>>() {
+//        Call<List<Word>> getCall = networkService.get_word();
+//        getCall.enqueue(new Callback<List<Word>>() {
 //            @Override
-//            public void onResponse(Call<List<Writing>> call, Response<List<Writing>> response) {
+//            public void onResponse(Call<List<Word>> call, Response<List<Word>> response) {
 //                if( response.isSuccessful()) {
-//                    List<Writing> wordList = response.body();
+//                    List<Word> wordList = response.body();
 //
 //                    String word_txt = "";
 //                    for(Word word : wordList){
@@ -224,7 +212,7 @@ public class NetworkTestActivity extends AppCompatActivity {
 //            }
 //        });
 //    }
-
+//
 //    @OnClick(R.id.bt2)
 //    public void bt2_click(){
 //        //Restaurant POST

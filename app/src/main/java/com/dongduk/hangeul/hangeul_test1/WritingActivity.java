@@ -3,6 +3,7 @@ package com.dongduk.hangeul.hangeul_test1;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +21,8 @@ public class WritingActivity extends BaseActivity {
     LinearLayout dialogLayout;
     AlertDialog dialog;
 
+    TextView tvWordWriting, tvMeaningWriting;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,13 @@ public class WritingActivity extends BaseActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        tvWordWriting = (TextView) findViewById(R.id.tvWordWriting);
+        tvMeaningWriting = (TextView) findViewById(R.id.tvMeaningWriting);
+
+        SharedPreferences pr = getSharedPreferences("pr", MODE_PRIVATE);
+        tvWordWriting.setText(pr.getString("word", ""));
+        tvMeaningWriting.setText(pr.getString(tvWordWriting.getText().toString(), ""));
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -47,7 +57,6 @@ public class WritingActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.barBtn:
-                //Toast.makeText(WritingActivity.this, "내마음속에 저장^,~", Toast.LENGTH_SHORT).show();
                 dialog = new AlertDialog.Builder(this)
                         .setMessage("글을 저장합니다")
 

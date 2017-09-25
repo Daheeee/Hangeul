@@ -1,8 +1,11 @@
 package com.dongduk.hangeul.hangeul_test1;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -40,7 +43,7 @@ public class MyRecordAdapter extends RecyclerView.Adapter<MyRecordAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         final MyRecordCard card = cards.get(position);
         holder.tvDateRecord.setText(card.getTvDateRecord());
         holder.tvWordRecord.setText(card.getTvWordRecord());
@@ -48,15 +51,35 @@ public class MyRecordAdapter extends RecyclerView.Adapter<MyRecordAdapter.ViewHo
         holder.tvContentRecord02.setText(card.getTvContentRecord02());
         holder.tvContentRecord03.setText(card.getTvContentRecord03());
         holder.tvContentRecord04.setText(card.getTvContentRecord04());
-//        holder.cardview.setOnLongClickListener(new View.OnLongClickListener() {
-//            @Override
-//            public boolean onLongClick(View v) {
-//                int p = getLayoutPosition();
-//                Toast.makeText(context, position, Toast.LENGTH_SHORT).show();
-//                //onItemRemove(cards.get(position));
-//                return true;
-//            }
-//        });
+        holder.cardview.setOnLongClickListener(new View.OnLongClickListener() {
+            int pos = position;
+            @Override
+            public boolean onLongClick(View v) {
+                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+                    @Override
+                    public  void onClick(DialogInterface dialog, int which) {
+                        switch ( which ) {
+                            case DialogInterface.BUTTON_POSITIVE:
+                                cards.remove(position);
+                                notifyItemRemoved(position);
+                                notifyItemRangeChanged(position, getItemCount());
+                                notifyDataSetChanged();
+                                break;
+                            case DialogInterface.BUTTON_NEGATIVE:
+                                break;
+                        }
+                    }
+                };
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
+                builder.setMessage("삭제하시겠습니까?")
+                        .setPositiveButton("네", dialogClickListener)
+                        .setNegativeButton("아니오", dialogClickListener)
+                        .show();
+
+                return  true;
+            }
+        });
     }
 
     @Override
@@ -94,17 +117,6 @@ public class MyRecordAdapter extends RecyclerView.Adapter<MyRecordAdapter.ViewHo
             btnVmoveRecord = (Button) itemView.findViewById(R.id.btn_vmore_record);
             //btnDeleteRecord = (Button) v.findViewById(R.id.btnDeleteRecord);
             cardview = (CardView) itemView.findViewById(R.id.cv_myrecord);
-
-            cardview.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                int p = getLayoutPosition();
-                //System.out.println("LongClick: "+p);
-                onItemRemove(p);
-                //btnDeleteRecord.setVisibility(View.VISIBLE);
-                return true;
-            }
-        });
         }
     }
 
