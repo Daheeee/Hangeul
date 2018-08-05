@@ -31,6 +31,9 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +47,11 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
     private RecyclerView recyclerView;
     private List<MyWord> wordList;
     int centerPos;
+    private FirebaseAuth auth;
+    private FirebaseUser user;
+    private String email;
+    private TextView tvEmail;
+
 
     private BackPressCloseHandler backPressCloseHandler;
 
@@ -77,6 +85,16 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (user != null) {
+
+            email = user.getEmail();
+        }
+        tvEmail = (TextView)navigationView.getHeaderView(0).findViewById(R.id.tvUserId);
+        tvEmail.setText(email);
+
+
         backPressCloseHandler = new BackPressCloseHandler(this);
         helper = new MyWordDBHelper(this);
 
@@ -102,6 +120,7 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
 //        wordList.add(new MyWord("09.09", "미\n리\n내\n", "가\n르\n거\n나\n\n쪼\n개\n지\n\n않\n고.", "자\n연\n그\n대\n로\n\n언\n제\n나\n\n변\n함\n없\n이\n"));
 //        wordList.add(new MyWord("       ", "", "", ""));
 //        wordList.add(new MyWord("       ", "", "", ""));
+
 
         SQLiteDatabase db = helper.getReadableDatabase();
         wordList = new ArrayList<>();
@@ -208,6 +227,8 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
         cursor.close();
         helper.close();
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
     }
 
 //    @Override
@@ -291,7 +312,6 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
             startActivity(mIntent);
             finish();
 
-
         } else if (id == R.id.myWord) {
             //현재페이지
         } else if (id == R.id.myRecord) {
@@ -299,8 +319,12 @@ public class MyWordActivity extends BaseActivity implements NavigationView.OnNav
             startActivity(mIntent);
             finish();
         } else if (id == R.id.setting) {
-
+            auth.getInstance().signOut();
+            Intent sign_intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(sign_intent);
+            finish();
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
