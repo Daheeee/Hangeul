@@ -70,7 +70,7 @@ public class MainActivity extends BaseActivity
     private DatabaseReference mDatabase;
     String id = "";
 //    SharedPreferences pr = getSharedPreferences("pr", MODE_PRIVATE);
-
+    Word value;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,7 +150,7 @@ public class MainActivity extends BaseActivity
                             // This method is called once with the initial value and again
                             // whenever data at this location is updated.
 
-                            Word value = dataSnapshot.getValue(Word.class);
+                            value = dataSnapshot.getValue(Word.class);
                             Log.d("MainActivity", "Value is: " + value.getTitle());
 
 
@@ -284,6 +284,7 @@ public class MainActivity extends BaseActivity
         switch(v.getId()) {
             case R.id.btnWrite:
                 mIntent = new Intent(this, WritingActivity.class);
+                mIntent.putExtra("word" , value);
                 startActivity(mIntent);
                 finish();
 

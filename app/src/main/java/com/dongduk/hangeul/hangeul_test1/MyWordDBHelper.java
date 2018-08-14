@@ -21,7 +21,7 @@ public class MyWordDBHelper extends SQLiteOpenHelper {
         db.execSQL("create table " + TABLE_NAME + " ( _id integer primary key autoincrement,"
                 + "date TEXT, word TEXT, meaning TEXT);");
 
-//		샘플 데이터
+//      샘플 데이터
         db.execSQL("INSERT INTO " + TABLE_NAME + " VALUES (null, '08.20', '꽃샘', '봄철 꽃이 필 무렵의 추위.');");
         db.execSQL("INSERT INTO " + TABLE_NAME + " VALUES (null, '08.23', '모가', '낮은 패의 우두머리. 인부나 광대 등의 우두머리.');");
         db.execSQL("INSERT INTO " + TABLE_NAME + " VALUES (null, '09.10', '가시버리', '부부를 속되게 이르는 말');");

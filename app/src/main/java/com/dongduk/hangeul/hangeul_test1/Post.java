@@ -10,32 +10,35 @@ import java.util.Map;
  * Created by jiyoungwon on 2017. 9. 25..
  */
 
-public class Writing {
+public class Post {
 
-    private long rid;
-    private String wid;
+    private long postid;
+    private String wordid;
     private String uid;
     private String date;
-
-
-
+    private String title;
     private String writing;
+    private String ex;
 
 
-    public Writing() { }
+    public Post() { }
 
-    public Writing(String wid, String uid, String date, String writing) {
-        this.wid = wid;
+
+    public Post(String wordid, String uid, String date, String title, String writing) {
+        this.wordid = wordid;
         this.uid = uid;
         this.date = date;
+        this.title = title;
         this.writing = writing;
     }
+
+
 
     @Exclude
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
         result.put("uid", uid);
-        result.put("wid", wid);
+        result.put("wid", wordid);
         result.put("date", date);
         result.put("writing", writing);
 
@@ -44,19 +47,19 @@ public class Writing {
     }
 
     public long getRid() {
-        return rid;
+        return postid;
     }
 
     public void setRid(long rid) {
-        this.rid = rid;
+        this.postid = rid;
     }
 
     public String getWid() {
-        return wid;
+        return wordid;
     }
 
     public void setWid(String wid) {
-        this.wid = wid;
+        this.wordid = wid;
     }
 
     public String getUid() {

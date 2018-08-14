@@ -122,7 +122,7 @@
 ////
 //public void bt2_Click(){
 //    //POST
-//    Writing writing = new Writing();
+//    Post writing = new Post();
 //
 //
 //    writing.setUid("test");
@@ -130,10 +130,10 @@
 //    writing.setDate("2017-09-20");
 //    writing.setWriting("test");
 //
-//    Call<Writing> postCall = networkService.post_writing(writing);
-//    postCall.enqueue(new Callback<Writing>() {
+//    Call<Post> postCall = networkService.post_writing(writing);
+//    postCall.enqueue(new Callback<Post>() {
 //        @Override
-//        public void onResponse(Call<Writing> call, Response<Writing> response) {
+//        public void onResponse(Call<Post> call, Response<Post> response) {
 //            if( response.isSuccessful()) {
 //                tv2.setText("등록");
 //
@@ -145,7 +145,7 @@
 //        }
 //
 //        @Override
-//        public void onFailure(Call<Writing> call, Throwable t) {
+//        public void onFailure(Call<Post> call, Throwable t) {
 //            Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
 //        }
 //    });
@@ -177,16 +177,16 @@
 //
 //    public void bt4_click(){
 //
-//        Call<List<Writing>> getCall = networkService.get_writings(3);
+//        Call<List<Post>> getCall = networkService.get_writings(3);
 //
-//        getCall.enqueue(new Callback<List<Writing>>() {
+//        getCall.enqueue(new Callback<List<Post>>() {
 //            @Override
-//            public void onResponse(Call<List<Writing>> call, Response<List<Writing>> response) {
+//            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
 //                if( response.isSuccessful()) {
-//                    List<Writing> writingList = response.body();
+//                    List<Post> writingList = response.body();
 //
 //                    String word_txt = "";
-//                    for(Writing writing : writingList){
+//                    for(Post writing : writingList){
 //                        word_txt += writing.getDate() +
 //                                writing.getWriting() +
 //                                "\n";
@@ -201,7 +201,7 @@
 //            }
 //
 //            @Override
-//            public void onFailure(Call<List<Writing>> call, Throwable t) {
+//            public void onFailure(Call<List<Post>> call, Throwable t) {
 //                Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
 //            }
 //        });

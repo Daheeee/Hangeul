@@ -1,6 +1,5 @@
 package com.dongduk.hangeul.hangeul_test1;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -47,6 +46,7 @@ public class WritingActivity extends BaseActivity {
     EditText etWriting;
     String wid;
     String uid;
+    Word word;
 
     private FirebaseAuth auth;
     private FirebaseUser user;
@@ -90,6 +90,9 @@ public class WritingActivity extends BaseActivity {
 
         Intent intent = getIntent();
         //uid = intent.getStringExtra("user");
+        word = (Word)intent.getSerializableExtra("word");
+        Log.d("WritingActivity", "word : " + word.getTitle());
+
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -146,16 +149,16 @@ public class WritingActivity extends BaseActivity {
     }
     private void submitPost() {
 
-        final Writing writing = new Writing();
+        final Post post = new Post();
 
-        writing.setUid(uid);
-        writing.setWid(wid);
+        post.setUid(uid);
+        post.setWid(wid);
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
         String currentDateTimeString = df.format(new Date());
 
-        writing.setDate(currentDateTimeString);
-        writing.setWriting(etWriting.getText().toString());
+        post.setDate(currentDateTimeString);
+        post.setWriting(etWriting.getText().toString());
 
 
         // Disable button so there are no multi-posts
@@ -179,7 +182,7 @@ public class WritingActivity extends BaseActivity {
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             // Write new post
-                            writeNewPost(writing);
+                            writeNewPost(post);
 
                             Intent mIntent;
                             mIntent = new Intent(WritingActivity.this, MainActivity.class);
@@ -246,24 +249,24 @@ public class WritingActivity extends BaseActivity {
 
     public void post_writing(){
         //POST
-        Writing writing = new Writing();
+        Post post = new Post();
 
 
-        writing.setUid(uid);
-        writing.setWid(wid);
+        post.setUid(uid);
+        post.setWid(wid);
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
         String currentDateTimeString = df.format(new Date());
 
-        writing.setDate(currentDateTimeString);
-        writing.setWriting(etWriting.getText().toString());
+        post.setDate(currentDateTimeString);
+        post.setWriting(etWriting.getText().toString());
 
         Log.d("datetime", uid.toString());
 
-        Call<Writing> postCall = networkService.post_writing(writing);
-        postCall.enqueue(new Callback<Writing>() {
+        Call<Post> postCall = networkService.post_writing(post);
+        postCall.enqueue(new Callback<Post>() {
             @Override
-            public void onResponse(Call<Writing> call, Response<Writing> response) {
+            public void onResponse(Call<Post> call, Response<Post> response) {
                 if( response.isSuccessful()) {
                     Intent mIntent;
                     mIntent = new Intent(WritingActivity.this, MainActivity.class);
@@ -278,21 +281,21 @@ public class WritingActivity extends BaseActivity {
             }
 
             @Override
-            public void onFailure(Call<Writing> call, Throwable t) {
+            public void onFailure(Call<Post> call, Throwable t) {
                 Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
             }
         });
     }
 
-    private void writeNewPost(Writing writing) {
+    private void writeNewPost(Post post) {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
         String key = mDatabase.child("posts").push().getKey();
-        Map<String, Object> postValues = writing.toMap();
+        Map<String, Object> postValues = post.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/posts/" + key, postValues);
-        childUpdates.put("/user-posts/" + writing.getUid() + "/" + key, postValues);
+        childUpdates.put("/user-posts/" + post.getUid() + "/" + key, postValues);
 
         mDatabase.updateChildren(childUpdates);
     }

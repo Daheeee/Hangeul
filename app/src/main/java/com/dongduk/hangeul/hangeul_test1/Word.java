@@ -1,10 +1,12 @@
 package com.dongduk.hangeul.hangeul_test1;
 
+import java.io.Serializable;
+
 /**
  * Created by jiyoungwon on 2017. 9. 17..
  */
 
-public class Word {
+public class Word  implements Serializable{
 //    private long wid;
 //    private String word;
 //    private String wordDesc;
