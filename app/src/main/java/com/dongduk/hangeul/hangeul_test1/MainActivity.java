@@ -119,62 +119,66 @@ public class MainActivity extends BaseActivity
         application.buildNetworkService("54.237.215.221", 8000);
         networkService = ApplicationController.getInstance().getNetworkService();
 
+
+
         //Restaurant GET
-        Call<Word> getCall = networkService.get_word();
-        getCall.enqueue(new Callback<Word>() {
-            @Override
-            public void onResponse(Call<Word> call, Response<Word> response) {
-                if( response.isSuccessful()) {
-                    Word word = response.body();
+//        Call<Word> getCall = networkService.get_word();
+//        getCall.enqueue(new Callback<Word>() {
+//            @Override
+//            public void onResponse(Call<Word> call, Response<Word> response) {
+//                if( response.isSuccessful()) {
+//                    Word word = response.body();
+//
+//                    wordMeaning = word.getWordDesc();
+//
+//                    meaning01 = ""; meaning02 = ""; meaning03 = ""; meaning04 = "";
+//                    countSpace = 0;
+//
+//                    SharedPreferences pr = getSharedPreferences("pr", MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = pr.edit();
+//
+//                    editor.putString("word", word.getWord());
+//                    editor.putString("wid", Long.toString(word.getWid()));
+////        editor.putString(tvWordMain.getText().toString(), tvMeaning01.getText().toString() + tvMeaning02.getText().toString() + tvMeaning03.getText().toString() + tvMeaning04.getText().toString());
+//                    editor.putString(word.getWord(), word.getWordDesc());
+//
+//                    editor.commit();
+//
+//                    for(int i = 0; i < word.getWordDesc().length(); i++) {
+//                        meaning = "";
+//
+//                        if(word.getWordDesc().charAt(i) == ' ') {
+//                            meaning += word.getWordDesc().charAt(i) + "\n\n";
+//                            countSpace ++;
+//                        } else {
+//                            meaning += word.getWordDesc().charAt(i);
+//                        }
+//
+//                        if (countSpace <3) meaning01 += meaning;
+//                        else if (countSpace >=3 && countSpace < 6) meaning02 += meaning;
+//                        else if (countSpace >=6 && countSpace < 9) meaning03 += meaning;
+//                        else if (countSpace >=9) meaning04 += meaning;
+//                    }
+//
+//                    tvWordMain.setText(word.getWord().toString());
+//                    tvMeaning01.setText("\n\n" + meaning01);
+//                    tvMeaning02.setText(meaning02);
+//                    tvMeaning03.setText(meaning03);
+//                    tvMeaning04.setText(meaning04);
+//
+//                } else {
+//                    int StatusCode = response.code();
+//                    Log.i(ApplicationController.TAG, "Status Code : " + StatusCode + " Error Message : " + response.errorBody());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Word> call, Throwable t) {
+//                Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
+//            }
+//        });
 
-                    wordMeaning = word.getWordDesc();
 
-                    meaning01 = ""; meaning02 = ""; meaning03 = ""; meaning04 = "";
-                    countSpace = 0;
-
-                    SharedPreferences pr = getSharedPreferences("pr", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = pr.edit();
-
-                    editor.putString("word", word.getWord());
-                    editor.putString("wid", Long.toString(word.getWid()));
-//        editor.putString(tvWordMain.getText().toString(), tvMeaning01.getText().toString() + tvMeaning02.getText().toString() + tvMeaning03.getText().toString() + tvMeaning04.getText().toString());
-                    editor.putString(word.getWord(), word.getWordDesc());
-
-                    editor.commit();
-
-                    for(int i = 0; i < word.getWordDesc().length(); i++) {
-                        meaning = "";
-
-                        if(word.getWordDesc().charAt(i) == ' ') {
-                            meaning += word.getWordDesc().charAt(i) + "\n\n";
-                            countSpace ++;
-                        } else {
-                            meaning += word.getWordDesc().charAt(i);
-                        }
-
-                        if (countSpace <3) meaning01 += meaning;
-                        else if (countSpace >=3 && countSpace < 6) meaning02 += meaning;
-                        else if (countSpace >=6 && countSpace < 9) meaning03 += meaning;
-                        else if (countSpace >=9) meaning04 += meaning;
-                    }
-
-                    tvWordMain.setText(word.getWord().toString());
-                    tvMeaning01.setText("\n\n" + meaning01);
-                    tvMeaning02.setText(meaning02);
-                    tvMeaning03.setText(meaning03);
-                    tvMeaning04.setText(meaning04);
-
-                } else {
-                    int StatusCode = response.code();
-                    Log.i(ApplicationController.TAG, "Status Code : " + StatusCode + " Error Message : " + response.errorBody());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Word> call, Throwable t) {
-                Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
-            }
-        });
 
 
 
