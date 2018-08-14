@@ -69,7 +69,7 @@ public class MainActivity extends BaseActivity
     MyWordDBHelper helper;
     private DatabaseReference mDatabase;
     String id = "";
-    SharedPreferences pr = getSharedPreferences("pr", MODE_PRIVATE);
+//    SharedPreferences pr = getSharedPreferences("pr", MODE_PRIVATE);
 
 
     @Override
@@ -123,15 +123,15 @@ public class MainActivity extends BaseActivity
         String currentDateTimeString = df.format(new Date());
         tvDateMain.setText(currentDateTimeString);
 
-//        ApplicationController application = ApplicationController.getInstance();
-//        application.buildNetworkService("us-central1-hanguel-6c329.cloudfunctions.net/");
-////        application.buildNetworkService("54.237.215.221", 8000);
-//        networkService = ApplicationController.getInstance().getNetworkService();
+        ApplicationController application = ApplicationController.getInstance();
+        application.buildNetworkService("us-central1-hanguel-6c329.cloudfunctions.net/");
+//        application.buildNetworkService("54.237.215.221", 8000);
+        networkService = ApplicationController.getInstance().getNetworkService();
 
 
-        if(currentDateTimeString.equals(pr.getString("date", ""))){
-
-        }
+//        if(currentDateTimeString.equals(pr.getString("date", ""))){
+//
+//        }
 
         Call<String> getCall = networkService.get_word_id();
         getCall.enqueue(new Callback<String>() {
@@ -157,13 +157,14 @@ public class MainActivity extends BaseActivity
                             meaning01 = ""; meaning02 = ""; meaning03 = ""; meaning04 = "";
                             countSpace = 0;
 
+                            SharedPreferences pr = getSharedPreferences("pr", MODE_PRIVATE);
                             SharedPreferences.Editor editor = pr.edit();
 
                             editor.putString("word", value.getTitle());
                             editor.putString("wid", Long.toString(value.getId()));
 //        editor.putString(tvWordMain.getText().toString(), tvMeaning01.getText().toString() + tvMeaning02.getText().toString() + tvMeaning03.getText().toString() + tvMeaning04.getText().toString());
                             editor.putString(value.getTitle(), value.getContent());
-                            editor.putString("date", currentDateTimeString);
+//                            editor.putString("date", currentDateTimeString);
 
                             editor.commit();
 
@@ -341,18 +342,18 @@ public class MainActivity extends BaseActivity
             params.alpha = 50;
             dialog.getWindow().setAttributes(params);
 
-            SimpleDateFormat df2 = new SimpleDateFormat("MM.dd", Locale.KOREA);
-            final String currentDateTimeString2 = df2.format(new Date());
+            // DB 저장 부분
+            SimpleDateFormat df2 = new SimpleDateFormat("YYYY.MM.dd", Locale.KOREA);
+            String currentDateTimeString2 = df2.format(new Date());
 
             SQLiteDatabase db = helper.getWritableDatabase();
 
             ContentValues row = new ContentValues();
             row.put("date",currentDateTimeString2);
             row.put("word",tvWordMain.getText().toString());
-            row.put("desc1", wordMeaning);
-            row.put("desc2", wordMeaning);
+            row.put("meaning", wordMeaning);
 
-            db.insert(MyWordDBHelper.TALBE_NAME, null, row);
+            db.insert(MyWordDBHelper.TABLE_NAME, null, row);
             helper.close();
 
             return true;

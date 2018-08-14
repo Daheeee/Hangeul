@@ -9,18 +9,16 @@ public class MyWord {
     private int _id;
     private String date;
     private String word;
-    private String desc1;
-    private  String desc2;
+    private String meaning;
 
     public MyWord() {
     }
 
-    public MyWord(int _id, String date, String word, String desc1, String desc2) {
+    public MyWord(int _id, String date, String word, String meaning) {
         this._id = _id;
         this.date = date;
         this.word = word;
-        this.desc1 = desc1;
-        this.desc2 = desc2;
+        this.meaning = meaning;
     }
 
     public int get_id() {
@@ -47,19 +45,11 @@ public class MyWord {
         this.word = word;
     }
 
-    public String getDesc1() {
-        return desc1;
+    public String getMeaning() {
+        return meaning;
     }
 
-    public void setDesc1(String desc1) {
-        this.desc1 = desc1;
-    }
-
-    public String getDesc2() {
-        return desc2;
-    }
-
-    public void setDesc2(String desc2) {
-        this.desc2 = desc2;
+    public void setMeaning(String meaning) {
+        this.meaning = meaning;
     }
 }

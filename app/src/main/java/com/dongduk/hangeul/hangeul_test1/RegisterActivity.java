@@ -69,7 +69,7 @@ public class RegisterActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        btnDelete = (Button)findViewById(R.id.btnDelete);
+        //btnDelete = (Button)findViewById(R.id.btnDelete);
         mEmailInputLayout = (TextInputLayout) findViewById(R.id.input_email);
         mPasswordInputLayout = (TextInputLayout) findViewById(R.id.input_password);
         mRePasswordInputLayout = (TextInputLayout) findViewById(R.id.input_re_password);

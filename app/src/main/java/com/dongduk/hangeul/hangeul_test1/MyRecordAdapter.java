@@ -29,7 +29,6 @@ public class MyRecordAdapter extends RecyclerView.Adapter<MyRecordAdapter.ViewHo
     int item_layout;
 
 
-
     public MyRecordAdapter(Context context, List<MyRecordCard> cards, int item_layout) {
         this.context = context;
         this.cards = cards;
