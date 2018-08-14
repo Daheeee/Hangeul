@@ -20,10 +20,17 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,11 +45,13 @@ public class WritingActivity extends BaseActivity {
 
     TextView tvWordWriting, tvMeaningWriting;
     EditText etWriting;
-    Long wid;
+    String wid;
     String uid;
 
     private FirebaseAuth auth;
     private FirebaseUser user;
+
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +69,10 @@ public class WritingActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
+
         ApplicationController application = ApplicationController.getInstance();
         //application.buildNetworkService("ab2a6169.ngrok.io");
         application.buildNetworkService("54.237.215.221", 8000);
@@ -73,7 +86,7 @@ public class WritingActivity extends BaseActivity {
         tvWordWriting.setText(pr.getString("word", ""));
         tvMeaningWriting.setText(pr.getString(tvWordWriting.getText().toString(), ""));
 
-        wid = Long.parseLong(pr.getString("wid", ""));
+        wid = pr.getString("wid", "");
 
         Intent intent = getIntent();
         //uid = intent.getStringExtra("user");
@@ -107,7 +120,8 @@ public class WritingActivity extends BaseActivity {
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                post_writing();
+//                                post_writing();
+                                submitPost();
                             }
                         })
                         .setNegativeButton("취소", null)
@@ -130,6 +144,75 @@ public class WritingActivity extends BaseActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    private void submitPost() {
+
+        final Writing writing = new Writing();
+
+        writing.setUid(uid);
+        writing.setWid(wid);
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
+        String currentDateTimeString = df.format(new Date());
+
+        writing.setDate(currentDateTimeString);
+        writing.setWriting(etWriting.getText().toString());
+
+
+        // Disable button so there are no multi-posts
+//        setEditingEnabled(false);
+        Toast.makeText(this, "Posting...", Toast.LENGTH_SHORT).show();
+
+        // [START single_value_read]
+        mDatabase.child("users").child(uid).addListenerForSingleValueEvent(
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // Get user value
+                        User user = dataSnapshot.getValue(User.class);
+
+                        // [START_EXCLUDE]
+                        if (user == null) {
+                            // User is null, error out
+                            Log.e("WritingActivity", "User " + uid + " is unexpectedly null");
+                            Toast.makeText(WritingActivity.this,
+                                    "Error: could not fetch user.",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            // Write new post
+                            writeNewPost(writing);
+
+                            Intent mIntent;
+                            mIntent = new Intent(WritingActivity.this, MainActivity.class);
+                            startActivity(mIntent);
+                            finish();
+                        }
+
+                        // Finish this Activity, back to the stream
+//                        setEditingEnabled(true);
+//                        finish();
+                        // [END_EXCLUDE]
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.w("WritingActivity", "getUser:onCancelled", databaseError.toException());
+                        // [START_EXCLUDE]
+//                        setEditingEnabled(true);
+                        // [END_EXCLUDE]
+                    }
+                });
+        // [END single_value_read]
+    }
+
+//    private void setEditingEnabled(boolean enabled) {
+//        mTitleField.setEnabled(enabled);
+//        mBodyField.setEnabled(enabled);
+//        if (enabled) {
+//            mSubmitButton.setVisibility(View.VISIBLE);
+//        } else {
+//            mSubmitButton.setVisibility(View.GONE);
+//        }
+//    }
 
     public void onClick(View v){
 
@@ -199,5 +282,18 @@ public class WritingActivity extends BaseActivity {
                 Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
             }
         });
+    }
+
+    private void writeNewPost(Writing writing) {
+        // Create new post at /user-posts/$userid/$postid and at
+        // /posts/$postid simultaneously
+        String key = mDatabase.child("posts").push().getKey();
+        Map<String, Object> postValues = writing.toMap();
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/posts/" + key, postValues);
+        childUpdates.put("/user-posts/" + writing.getUid() + "/" + key, postValues);
+
+        mDatabase.updateChildren(childUpdates);
     }
 }

@@ -23,6 +23,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.tsengvn.typekit.TypekitContextWrapper;
 
 public class RegisterActivity extends BaseActivity {
@@ -37,6 +40,8 @@ public class RegisterActivity extends BaseActivity {
     private TextInputLayout mRePasswordInputLayout;
 
     private ProgressDialog progressDialog;
+
+    private DatabaseReference mDatabase;
 
     private FirebaseAuth firebaseAuth;
 
@@ -68,6 +73,8 @@ public class RegisterActivity extends BaseActivity {
         mEmailInputLayout = (TextInputLayout) findViewById(R.id.input_email);
         mPasswordInputLayout = (TextInputLayout) findViewById(R.id.input_password);
         mRePasswordInputLayout = (TextInputLayout) findViewById(R.id.input_re_password);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         firebaseAuth = FirebaseAuth.getInstance();
         if(firebaseAuth.getCurrentUser() != null){
@@ -132,9 +139,9 @@ public class RegisterActivity extends BaseActivity {
 
                                     //user is successfully registered and logged in
                                     //we will start the profile activity here
-
-                                    finish();
-                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                    onAuthSuccess(task.getResult().getUser());
+//                                    finish();
+//                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                 } else {
 //                                    Toast.makeText(RegisterActivity.this, "회원가입이 실패하였습니다. 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
                                     mEmailInputLayout.setError(null);
@@ -148,7 +155,30 @@ public class RegisterActivity extends BaseActivity {
 
         progressDialog.hide();
     }
+    private void onAuthSuccess(FirebaseUser user) {
+        String username = usernameFromEmail(user.getEmail());
 
+        // Write new user
+        writeNewUser(user.getUid(), username, user.getEmail());
+
+        // Go to MainActivity
+        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+        finish();
+    }
+    private String usernameFromEmail(String email) {
+        if (email.contains("@")) {
+            return email.split("@")[0];
+        } else {
+            return email;
+        }
+    }
+
+    // [START basic_write]
+    private void writeNewUser(String userId, String name, String email) {
+        User user = new User(name, email);
+
+        mDatabase.child("users").child(userId).setValue(user);
+    }
 
     public boolean showError(String e, String p, String p2){
         mEmailInputLayout.setError(null);
